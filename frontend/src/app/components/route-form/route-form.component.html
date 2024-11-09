@@ -1,37 +1,65 @@
 <div class="grid flex flex-column justify-content-between pt-3">
     <div class="col-12">
         <div class="grid gap-1 justify-content-center">
-            <div class="col-5 border-round border-1 border-primary">
-                <label for="username">Username</label>
-                <input
-                    pInputText
-                    id="username"
-                    aria-describedby="username-help"
-                    [(ngModel)]="value" />
+            <div class="col-5">
+                <p-inputGroup>
+                    <input type="text" pInputText placeholder="From" />
+                    <button type="button" pButton icon="pi pi-search" class="p-button-info"></button>
+                </p-inputGroup>
             </div>
-            <div class="col-5 border-round border-1 border-primary">
-                <label for="username">Username</label>
-                <input
-                    pInputText
-                    id="username"
-                    aria-describedby="username-help"
-                    [(ngModel)]="value" />
+            <div class="col-5">
+                <p-inputGroup>
+                    <input type="text" pInputText placeholder="To" />
+                    <button type="button" pButton icon="pi pi-search" class="p-button-warning"></button>
+                </p-inputGroup>
             </div>
         </div>
     </div>
 
     <div class="col-12">
         <div class="grid gap-1 justify-content-center">
-            <div class="col-5 border-round border-1 border-primary">
-                <label for="username">Username</label>
-                <input
-                    pInputText
-                    id="username"
-                    aria-describedby="username-help"
-                    [(ngModel)]="value" />
+            <div class="col-5">
+                <input type="text" pInputText [(ngModel)]="value" placeholder="Route Name"/>
             </div>
-            <div class="col-5 border-round border-1 border-primary text-center">
-                Distance : Kms
+            <div class="col-5">
+                <p-chip label="Distance : " [style]="{height: '100%', width : '100%'}" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="grid justify-content-center">
+            <div class="col-10">
+                <p-multiSelect
+        [options]="days"
+        [(ngModel)]="selectedDays"
+        optionLabel="name"
+        placeholder="Select Days" [style]="{width:'100%'}"/>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-12">
+        <div class="grid justify-content-center">
+            <div class="col-10">
+                <p-dropdown
+                [options]="cars"
+                [(ngModel)]="selectedCar"
+                optionLabel="name"
+                placeholder="Select a Vehicle"
+                [style]="{width:'100%'}" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="grid gap-1 justify-content-center">
+            <div class="col-5">
+                <p-chip label="Estimated Emission : " [style]="{height: '100%', width : '100%'}" />
+            </div>
+            <div class="col-5 text-center">
+                <p-chip label="Estimated Expenditure : " [style]="{height: '100%', width : '100%'}" />
             </div>
         </div>
     </div>

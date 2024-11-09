@@ -30,13 +30,16 @@ import { UserCardComponent } from './user-card/user-card.component';
     ChatBoxComponent,
     UserCardComponent // Import UserCardComponent directly as it's now standalone
   ],
+
   templateUrl: './chats.component.html',
   styleUrls: ['./chats.component.scss'],
   providers: [ChatService],
 })
+
 export class ChatsComponent implements OnDestroy {
   subscription: Subscription;
   activeUser!: User;
+
 
   constructor(private chatService: ChatService) {
     this.subscription = this.chatService.activeUser$.subscribe((data) => (this.activeUser = data));

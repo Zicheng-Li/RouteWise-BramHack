@@ -14,6 +14,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ChipModule } from 'primeng/chip';
 import { ViewChild } from '@angular/core';
 import { ElementRef } from '@angular/core';
+import { LocationService } from 'src/app/services/maps/location.service';
 
 @Component({
   selector: 'app-route-form',
@@ -63,4 +64,22 @@ export class RouteFormComponent {
     { name: 'Ferrari', code: 'RM' },
     { name: 'Porsche', code: 'LDN' },
   ];
+
+  constructor( private locationService : LocationService) {}
+
+  getLocationSuggestions(query : string, toOrFrom : boolean) {
+    this.locationService.searchPlaces(query).subscribe({
+        next : (res) => {
+            if(toOrFrom) {
+                this.to = res.places[0].formattedAddress;
+            }
+            else {
+                this.from = res.places[0].formattedAddress;
+            }
+        },
+        error : (err : Error) => {
+            alert(err);
+        }
+    })
+  }
 }

@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { AppLayoutComponent } from './layout/app.layout.component';
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
+import { SettingsPageComponent } from './pages/settings-page/settings-page.component';
+import { SocialPageComponent } from './pages/social-page/social-page.component';
+import { LeaderboardComponent } from './subpages/leaderboard/leaderboard.component';
+import { ChatsComponent } from './subpages/chats/chats.component';
 
 const routerOptions: ExtraOptions = {
     anchorScrolling: 'enabled'
@@ -10,7 +15,56 @@ const routes: Routes = [
     {
         path: '', component: AppLayoutComponent,
         children: [
-            { path: '', loadChildren: () => import('./demo/components/dashboards/dashboards.module').then(m => m.DashboardsModule) },
+
+            {
+                path : '',
+                component : DashboardPageComponent,
+                data : { breadcrumb: 'Dashboard' }
+            },
+            {
+                path : 'social',
+                component : SocialPageComponent,
+                data : { breadcrumb: 'Social'},
+                children : [
+                    {
+                        path: '',
+                        component: LeaderboardComponent,
+                        data: { breadcrumb: 'Leaderboard'}
+                    },
+                    {
+                        path: 'chats',
+                        component: ChatsComponent,
+                        data: { breadcrumb: 'Chats'}
+                    }
+                ]
+            },
+            {
+                path : 'settings',
+                component : SettingsPageComponent,
+                data : { breadcrumb: 'Settings'}
+            },
+
+
+
+
+//ignore below
+
+
+
+
+
+
+
+
+
+
+
+
+            {
+                path : 'settings',
+                component : SettingsPageComponent,
+                data : { breadcrumb: 'Settings'},
+            },
             { path: 'uikit', data: { breadcrumb: 'UI Kit' }, loadChildren: () => import('./demo/components/uikit/uikit.module').then(m => m.UIkitModule) },
             { path: 'utilities', data: { breadcrumb: 'Utilities' }, loadChildren: () => import('./demo/components/utilities/utilities.module').then(m => m.UtilitiesModule) },
             { path: 'pages', data: { breadcrumb: 'Pages' }, loadChildren: () => import('./demo/components/pages/pages.module').then(m => m.PagesModule) },

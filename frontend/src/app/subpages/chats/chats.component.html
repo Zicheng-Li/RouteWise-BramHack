@@ -1,1 +1,13 @@
 <p>chats works!</p>
+<input
+type="text"
+[(ngModel)]="userInput"
+placeholder="Type your message here..."
+(keyup.enter)="getResponse()"
+class="user-input"
+/>
+<button (click)="getResponse()" class="submit-button">Send</button>
+<div *ngIf="response" class="response">
+    <h3>GPT Response:</h3>
+    <p>{{ response }}</p>
+  </div>

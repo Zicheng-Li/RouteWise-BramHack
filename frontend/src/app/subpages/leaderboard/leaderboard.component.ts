@@ -59,13 +59,15 @@ export class LeaderboardComponent implements OnInit, OnDestroy  {
 
     constructor(
         private productService: ProductService,
-        private layoutService: LayoutService
+        private layoutService: LayoutService,
+        private identifierService: IdentifierService
     ) {
         this.subscription = this.layoutService.configUpdate$
             .pipe(debounceTime(25))
             .subscribe((config) => {
                 this.initCharts();
             });
+        this.identifierService.changeStates(false, true, true)
     }
 
     ngOnInit(): void {
@@ -232,11 +234,5 @@ export class LeaderboardComponent implements OnInit, OnDestroy  {
         if (this.subscription) {
             this.subscription.unsubscribe();
         }
-    }
-
-    constructor(private identifierService : IdentifierService) {}
-
-    ngOnInit(): void {
-        this.identifierService.changeStates(false, true, true)
     }
 }

@@ -1,3 +1,4 @@
+import { IdentifierService } from 'src/app/services/config/identifier.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription, debounceTime } from 'rxjs';
 import { Product } from 'src/app/demo/api/product';
@@ -34,6 +35,7 @@ import { RippleModule } from 'primeng/ripple';
   templateUrl: './leaderboard.component.html',
   styleUrl: './leaderboard.component.scss'
 })
+
 export class LeaderboardComponent implements OnInit, OnDestroy  {
   knobValue: number = 90;
 
@@ -232,4 +234,9 @@ export class LeaderboardComponent implements OnInit, OnDestroy  {
         }
     }
 
+    constructor(private identifierService : IdentifierService) {}
+
+    ngOnInit(): void {
+        this.identifierService.changeStates(false, true, true)
+    }
 }

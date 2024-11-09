@@ -14,6 +14,8 @@ import { DialogModule } from 'primeng/dialog';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { RouteFormComponent } from "../../components/route-form/route-form.component";
+import { AiService } from 'src/app/services/ai/ai.service';
+import { IdentifierService } from 'src/app/services/config/identifier.service';
 
 interface MonthlyPayment {
     name?: string;
@@ -51,7 +53,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
     display : boolean = false;
 
-    constructor(private layoutService: LayoutService) {
+    constructor(private layoutService: LayoutService, private aiService : AiService, private identifierService : IdentifierService) {
         this.subscription = this.layoutService.configUpdate$
             .pipe(debounceTime(25))
             .subscribe((config) => {
@@ -60,6 +62,12 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+
+        this.identifierService.changeStates(true, false, false);
+
+        this.aiService.generateText("hey how are you").subscribe((res) => {
+            console.log(res)
+        });
         this.initChart();
 
         this.payments = [

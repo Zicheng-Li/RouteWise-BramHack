@@ -14,6 +14,10 @@ import { DialogModule } from 'primeng/dialog';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { RouteFormComponent } from "../../components/route-form/route-form.component";
+import { DataService } from 'src/app/services/firebase/data.service';
+import { UploadService } from 'src/app/services/firebase/upload.service';
+import { Route } from 'src/app/models/route';
+import { Car } from 'src/app/models/car';
 
 interface MonthlyPayment {
     name?: string;
@@ -51,7 +55,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
     display : boolean = false;
 
-    constructor(private layoutService: LayoutService) {
+    constructor(private layoutService: LayoutService, private dataService: DataService) {
         this.subscription = this.layoutService.configUpdate$
             .pipe(debounceTime(25))
             .subscribe((config) => {
@@ -60,6 +64,15 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+        this.dataService.getData("J69hAKRxOxWzhusH0b6CwmSycwC2").subscribe({
+            next: (data) => {
+              console.log('User Data:', data);
+            },
+            error: (error) => {
+              console.error('Error fetching data:', error);
+            }
+          });
+        
         this.initChart();
 
         this.payments = [

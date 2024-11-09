@@ -22,7 +22,7 @@ export class AiService {
       messages: [
         { role: 'user', content: message }
       ],
-      max_tokens: 100 
+      max_tokens: 10000 
     };
   
     return this.http.post(this.apiUrl, body, { headers });

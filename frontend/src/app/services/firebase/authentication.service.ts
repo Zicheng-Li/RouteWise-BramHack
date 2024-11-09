@@ -1,5 +1,5 @@
 import { Injectable, inject } from "@angular/core";
-import { Auth, createUserWithEmailAndPassword, UserCredential } from "@angular/fire/auth";
+import { Auth, createUserWithEmailAndPassword, UserCredential, signInWithEmailAndPassword } from "@angular/fire/auth";
 import { Observable, from } from "rxjs";
 import { Firestore, collection, addDoc } from "@angular/fire/firestore";
 
@@ -30,6 +30,11 @@ export class AuthService {
       }
     });
 
+    return from(promise);
+  }
+
+  login(email: string, password: string): Observable<void> {
+    const promise = signInWithEmailAndPassword(this.firebaseAuth, email, password).then(() =>{});
     return from(promise);
   }
 }

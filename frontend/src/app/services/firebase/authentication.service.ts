@@ -2,6 +2,7 @@ import { Injectable, inject } from "@angular/core";
 import { Auth, createUserWithEmailAndPassword, UserCredential, signInWithEmailAndPassword } from "@angular/fire/auth";
 import { Observable, from } from "rxjs";
 import { Firestore, collection, addDoc } from "@angular/fire/firestore";
+import { map, catchError } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
@@ -33,8 +34,24 @@ export class AuthService {
     return from(promise);
   }
 
-  login(email: string, password: string): Observable<void> {
-    const promise = signInWithEmailAndPassword(this.firebaseAuth, email, password).then(() =>{});
-    return from(promise);
+  login(email: string, password: string): Observable<string> {
+    const promise: Promise<UserCredential> = signInWithEmailAndPassword(this.firebaseAuth, email, password);
+
+    return from(promise).pipe(
+      map((userCredential) => {
+        if (!userCredential || !userCredential.user) {
+          throw new Error("UserCredential or user is undefined");
+        }
+        return userCredential.user.uid;
+      }),
+      catchError((error) => {
+        console.error("Login failed:", error);  // Log the error for debugging
+        return [""];  // Return an empty string or handle the error as needed
+      })
+    );
+  }
+
+  getUserId(): string | null {
+    return this.firebaseAuth.currentUser?.uid ?? null;
   }
 }

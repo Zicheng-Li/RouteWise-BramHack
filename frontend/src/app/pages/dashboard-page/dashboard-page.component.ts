@@ -14,6 +14,10 @@ import { DialogModule } from 'primeng/dialog';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { RouteFormComponent } from "../../components/route-form/route-form.component";
+import { DataService } from 'src/app/services/firebase/data.service';
+import { UploadService } from 'src/app/services/firebase/upload.service';
+import { Route } from 'src/app/models/route';
+import { Car } from 'src/app/models/car';
 import { AiService } from 'src/app/services/ai/ai.service';
 import { IdentifierService } from 'src/app/services/config/identifier.service';
 
@@ -53,7 +57,8 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
     display : boolean = false;
 
-    constructor(private layoutService: LayoutService, private aiService : AiService, private identifierService : IdentifierService) {
+    constructor(private layoutService: LayoutService, private dataService: DataService ,private aiService : AiService, private identifierService : IdentifierService) {
+
         this.subscription = this.layoutService.configUpdate$
             .pipe(debounceTime(25))
             .subscribe((config) => {
@@ -63,11 +68,21 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
+        this.dataService.getData("J69hAKRxOxWzhusH0b6CwmSycwC2").subscribe({
+            next: (data) => {
+              console.log('User Data:', data);
+            },
+            error: (error) => {
+              console.error('Error fetching data:', error);
+            }
+          });
+
         this.identifierService.changeStates(true, false, false);
 
         this.aiService.generateText("hey how are you").subscribe((res) => {
             console.log(res)
         });
+
         this.initChart();
 
         this.payments = [

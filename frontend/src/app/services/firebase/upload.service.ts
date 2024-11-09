@@ -15,7 +15,7 @@ export class UploadService {
       const usersCollectionRef = collection(this.firestore, 'users');
 
       // Query for the document where `uuid` matches the provided userId
-      const userQuery = query(usersCollectionRef, where('uuid', '==', userId));
+      const userQuery = query(usersCollectionRef, where('uid', '==', userId));
       const userSnapshot = await getDocs(userQuery);
 
       if (userSnapshot.empty) {
@@ -45,7 +45,7 @@ export class UploadService {
       const usersCollectionRef = collection(this.firestore, 'users');
 
       // Query for the document where `uuid` matches the provided userId
-      const userQuery = query(usersCollectionRef, where('uuid', '==', userId));
+      const userQuery = query(usersCollectionRef, where('uid', '==', userId));
       const userSnapshot = await getDocs(userQuery);
 
       if (userSnapshot.empty) {

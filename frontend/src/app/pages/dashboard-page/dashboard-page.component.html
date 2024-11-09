@@ -111,7 +111,7 @@
         </div>
     </div>
 
-    <p-dialog header="Route Info" [(visible)]="display" [modal]="true" showEffect="fade"  [breakpoints]="{'960px': '75vw'}">
+    <p-dialog header="Route Info" [(visible)]="display" [modal]="true" showEffect="fade" [style]="{height : '65vh'}" [breakpoints]="{'960px': '75vw'}">
         <div class="grid">
             <div class="col-12">
                 <app-route-form></app-route-form>
@@ -119,7 +119,7 @@
         </div>
 
         <ng-template pTemplate="footer">
-                <button pButton icon="pi pi-check" (click)="display=false" label="Ok" class="p-button-outlined"></button>
+                <button pButton icon="pi pi-check" (click)="display=false" label="Create" class="p-button-outlined"></button>
         </ng-template>
     </p-dialog>
 

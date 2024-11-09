@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { IdentifierService } from 'src/app/services/config/identifier.service';
+import { OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-leaderboard',
@@ -7,6 +9,11 @@ import { Component } from '@angular/core';
   templateUrl: './leaderboard.component.html',
   styleUrl: './leaderboard.component.scss'
 })
-export class LeaderboardComponent {
+export class LeaderboardComponent implements OnInit {
 
+    constructor(private identifierService : IdentifierService) {}
+
+    ngOnInit(): void {
+        this.identifierService.changeStates(false, true, true)
+    }
 }

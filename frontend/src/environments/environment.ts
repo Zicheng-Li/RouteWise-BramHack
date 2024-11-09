@@ -5,5 +5,9 @@ export const environment = {
 
     googleMaps : {
         ***REMOVED*** "***REMOVED***"
+    },
+
+    openAi : {
+        apiKey: '***REMOVED***'
     }
 }

@@ -113,7 +113,7 @@ export class LeaderboardComponent implements OnInit, OnDestroy  {
             labels: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'],
             datasets: [
                 {
-                    label: 'Revenue',
+                    label: '',
                     backgroundColor:
                         documentStyle.getPropertyValue('--primary-500'),
                     barThickness: 12,
@@ -121,7 +121,7 @@ export class LeaderboardComponent implements OnInit, OnDestroy  {
                     data: this.selectedWeek.data[0],
                 },
                 {
-                    label: 'Profit',
+                    label: '',
                     backgroundColor:
                         documentStyle.getPropertyValue('--primary-200'),
                     barThickness: 12,
@@ -132,7 +132,7 @@ export class LeaderboardComponent implements OnInit, OnDestroy  {
         };
 
         this.pieData = {
-            labels: ['Electronics', 'Fashion', 'Household'],
+            labels: ['Ashmit', 'Jashanjot', 'Sarthak'],
             datasets: [
                 {
                     data: [300, 50, 100],

@@ -9,7 +9,8 @@
                 </div>
             </div>
             <div class="flex gap-2 sm:ml-auto">
-                <button pButton pRipple type="button" icon="pi pi-plus" label="Add Route" class="p-button-outlined p-button-sm" pTooltip="Add Route" tooltipPosition="bottom"></button>
+                <button pButton pRipple type="button" icon="pi pi-plus" label="Add Route" class="p-button-outlined p-button-sm" pTooltip="Add Route" tooltipPosition="bottom"
+                (click)="displayRouteDiag()"></button>
                 <button type="button" pButton pTooltip="Download" tooltipPosition="bottom" icon="pi pi-download" class="p-button-rounded p-button-outlined"></button>
                 <button type="button" pButton pTooltip="Share" tooltipPosition="bottom" icon="pi pi-send" class="p-button-rounded"></button>
             </div>
@@ -110,4 +111,17 @@
         </div>
     </div>
 
+    <p-dialog header="Route Info" [(visible)]="display" [modal]="true" showEffect="fade"  [breakpoints]="{'960px': '75vw'}">
+        <div class="grid">
+            <div class="col-12">
+                <app-route-form></app-route-form>
+            </div>
+        </div>
+
+        <ng-template pTemplate="footer">
+                <button pButton icon="pi pi-check" (click)="display=false" label="Ok" class="p-button-outlined"></button>
+        </ng-template>
+    </p-dialog>
+
 </div>
+

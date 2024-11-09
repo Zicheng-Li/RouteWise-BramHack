@@ -9,7 +9,11 @@ import { RippleModule } from 'primeng/ripple';
 import { TagModule } from 'primeng/tag';
 import { TooltipModule } from 'primeng/tooltip';
 import { Subscription, debounceTime } from 'rxjs';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { DialogModule } from 'primeng/dialog';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
+import { RouteFormComponent } from "../../components/route-form/route-form.component";
 
 interface MonthlyPayment {
     name?: string;
@@ -25,10 +29,13 @@ interface MonthlyPayment {
     ButtonModule,
     RippleModule,
     TagModule,
+    DialogModule,
     TooltipModule,
     TableModule,
     InputNumberModule,
-    ChartModule],
+    ChartModule,
+    ConfirmDialogModule,
+    OverlayPanelModule, RouteFormComponent],
   templateUrl: './dashboard-page.component.html',
   styleUrl: './dashboard-page.component.scss'
 })
@@ -41,6 +48,8 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     payments: MonthlyPayment[] = [];
 
     subscription: Subscription;
+
+    display : boolean = false;
 
     constructor(private layoutService: LayoutService) {
         this.subscription = this.layoutService.configUpdate$
@@ -175,5 +184,9 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
         if (this.subscription) {
             this.subscription.unsubscribe();
         }
+    }
+
+    displayRouteDiag() {
+        this.display = !this.display;
     }
 }

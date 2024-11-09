@@ -1,0 +1,57 @@
+{
+    "uID" : 128376123,
+    "fristname" : "sasi",
+    "lastname" : "sasi",
+    "routes" : [
+        {
+            "name" : "office",
+            "to" : "oshawa",
+            "from" : "opg",
+            "distance" : 12,
+            "car" : {
+                "year" : 2012,
+                "name" : "honey singh",
+                "make" : "718",
+                "brand" : "ferrari",
+                "efficiency" : 12
+            },
+            "frequency" : [1, 0, 1, 0, 1, 0, 0],
+            "emission" : 12,
+            "expenditure" : 31
+        },
+        {
+            "name" : "shopping",
+            "to" : "walmart",
+            "from" : "oshawa",
+            "distance" : 20,
+            "car" : {
+                "year" : 2018,
+                "name" : "meri gaadi",
+                "make" : "918",
+                "brand" : "porsche",
+                "efficiency" : 20
+            },
+            "frequency" : [0, 1, 0, 0, 0, 0, 0],
+            "emission" : 3,
+            "expenditure" : 7
+        }
+    ],
+    "cars" : [
+        {
+            "year" : 2018,
+            "name" : "meri gaadi",
+            "make" : "918",
+            "brand" : "porsche",
+            "efficiency" : 20
+        },
+        {
+            "year" : 2012,
+            "name" : "honey singh",
+            "make" : "718",
+            "brand" : "ferrari",
+            "efficiency" : 12
+        }
+    ],
+    "friends" : [3123, 234, 543, 546, 13123],
+    "totalEmission" : 15
+}

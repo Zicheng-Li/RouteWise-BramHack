@@ -1,4 +1,5 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 
 @Component({
@@ -9,7 +10,7 @@ export class AppTopbarComponent {
 
     @ViewChild('menubutton') menuButton!: ElementRef;
 
-    constructor(public layoutService: LayoutService) { }
+    constructor(public layoutService: LayoutService, private router : Router) { }
 
     onMenuButtonClick() {
         this.layoutService.onMenuToggle();
@@ -21,5 +22,9 @@ export class AppTopbarComponent {
     onConfigButtonClick() {
         this.layoutService.showConfigSidebar();
     }
-    
+
+    navigateToSettings() {
+        this.router.navigateByUrl('settings')
+    }
+
 }

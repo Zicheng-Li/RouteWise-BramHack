@@ -1,4 +1,6 @@
 import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { AuthService } from 'src/app/services/firebase/authentication.service';
 
@@ -10,6 +12,8 @@ export class LoginComponent {
     email: string = '';
     password: string = '';
     authService = inject(AuthService)
+    messageService = inject(MessageService);
+    router = inject(Router);
 
     constructor(private layoutService: LayoutService) {}
 
@@ -18,8 +22,17 @@ export class LoginComponent {
     }
 
     onSubmit(): void{
-        console.log("Email: "+this.email)
-        console.log("Password: "+this.password)
-        
+        if(this.email == ""){
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Email Field is empty'});
+            return;
+        }
+        if(this.password == ""){
+            this.messageService.add({severity:'error', summary: 'Error', detail: 'Password Field is empty'});
+            return;
+        }
+
+        this.authService.login(this.email, this.password).subscribe(() => {
+            this.router.navigateByUrl("/");
+        })
     }
 }

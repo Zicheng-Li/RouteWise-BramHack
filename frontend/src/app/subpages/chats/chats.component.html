@@ -1,13 +1,9 @@
-<p>chats works!</p>
-<input
-type="text"
-[(ngModel)]="userInput"
-placeholder="Type your message here..."
-(keyup.enter)="getResponse()"
-class="user-input"
-/>
-<button (click)="getResponse()" class="submit-button">Send</button>
-<div *ngIf="response" class="response">
-    <h3>GPT Response:</h3>
-    <p>{{ response }}</p>
+
+<div class="flex flex-column md:flex-row gap-5" style="min-height: 81vh">
+    <div class="md:w-25rem card p-0">
+      <app-chat-sidebar></app-chat-sidebar>
+    </div>
+    <div class="flex-1 card p-0">
+      <app-chat-box [user]="activeUser"></app-chat-box>
+    </div>
   </div>

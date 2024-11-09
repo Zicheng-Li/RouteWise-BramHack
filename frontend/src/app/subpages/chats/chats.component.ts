@@ -1,30 +1,51 @@
-import { Component } from '@angular/core';
-import { AiService } from 'src/app/services/ai/ai.service';
-import { FormsModule } from '@angular/forms';
+import { Component, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { User } from 'src/app/demo/api/user';
+import { ChatService } from './service/chat.service';
+import { AvatarModule } from 'primeng/avatar';
+import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { BadgeModule } from 'primeng/badge';
+import { RippleModule } from 'primeng/ripple';
+import { ChatSidebarComponent } from './chat-sidebar/chat-sidebar.component';
+import { ChatBoxComponent } from './chat-box/chat-box.component';
+import { UserCardComponent } from './user-card/user-card.component';
+
 @Component({
   selector: 'app-chats',
   standalone: true,
-  imports: [FormsModule,CommonModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    AvatarModule,
+    InputTextModule,
+    ButtonModule,
+    BadgeModule,
+    OverlayPanelModule,
+    RippleModule,
+    ChatSidebarComponent,
+    ChatBoxComponent,
+    UserCardComponent // Import UserCardComponent directly as it's now standalone
+  ],
+
   templateUrl: './chats.component.html',
-  styleUrl: './chats.component.scss'
+  styleUrls: ['./chats.component.scss'],
+  providers: [ChatService],
 })
-export class ChatsComponent {
-  userInput:string='';
-  response:string | null=null;
 
-  constructor(private gptService: AiService){}
+export class ChatsComponent implements OnDestroy {
+  subscription: Subscription;
+  activeUser!: User;
 
-  getResponse() {
-    if(this.userInput.trim()){
-      this.gptService.generateText(this.userInput)
-      .subscribe(response => {
-        this.response=response.choices[0].message.content; 
-        this.userInput='';
-        console.log(response);
-      });
-    }
-    
-    }
 
+  constructor(private chatService: ChatService) {
+    this.subscription = this.chatService.activeUser$.subscribe((data) => (this.activeUser = data));
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
 }

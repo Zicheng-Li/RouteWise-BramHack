@@ -1,1 +1,256 @@
-<p>settings-page works!</p>
+<div class="surface-ground px-4 py-5 md:px-6 lg:px-8">
+    <div class="flex justify-content-between align-items-center mb-4">
+      <span class="text-900 font-bold text-4xl">Settings</span>
+      <p-button label="Save Changes" icon="pi pi-save" severity="success" (onClick)="saveSettings()"></p-button>
+    </div>
+  
+    <div class="grid">
+      <!-- Privacy & Security Card -->
+      <div class="col-12 md:col-6 lg:col-6 p-3">
+        <p-card header="Privacy & Security" styleClass="h-full">
+          <div class="flex flex-column gap-4">
+            <div class="flex align-items-center justify-content-between">
+              <div class="flex align-items-center gap-2">
+                <span class="font-medium">Open to Collaborations</span>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Allow other users to see and request ride sharing opportunities with you"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-inputSwitch [(ngModel)]="privacySettings.openToCollab"></p-inputSwitch>
+            </div>
+  
+            <div class="flex align-items-center justify-content-between">
+              <div class="flex align-items-center gap-2">
+                <span class="font-medium">Share Portfolio</span>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Make your route portfolio visible to other users"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-inputSwitch [(ngModel)]="privacySettings.sharePortfolio"></p-inputSwitch>
+            </div>
+  
+            <div class="flex align-items-center justify-content-between">
+              <div class="flex align-items-center gap-2">
+                <span class="font-medium">Allow AI Analysis</span>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Enable AI to analyze your routes and suggest optimizations"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-inputSwitch [(ngModel)]="privacySettings.allowAIAnalysis"></p-inputSwitch>
+            </div>
+  
+            <div class="flex align-items-center justify-content-between">
+              <div class="flex align-items-center gap-2">
+                <span class="font-medium">Show in Leaderboard</span>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Display your carbon footprint ranking among friends"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-inputSwitch [(ngModel)]="privacySettings.showInLeaderboard"></p-inputSwitch>
+            </div>
+  
+            <div class="flex align-items-center justify-content-between">
+              <div class="flex align-items-center gap-2">
+                <span class="font-medium">Anonymize Data</span>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Hide personal identifiers in shared data"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-inputSwitch [(ngModel)]="privacySettings.anonymizeData"></p-inputSwitch>
+            </div>
+  
+            <div class="flex align-items-center justify-content-between">
+              <div class="flex align-items-center gap-2">
+                <span class="font-medium">Location Tracking</span>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Enable real-time location tracking for accurate route suggestions"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-inputSwitch [(ngModel)]="privacySettings.locationTracking"></p-inputSwitch>
+            </div>
+          </div>
+        </p-card>
+      </div>
+  
+      <!-- Notifications Card -->
+      <div class="col-12 md:col-6 lg:col-6 p-3">
+        <p-card header="Notifications" styleClass="h-full">
+          <div class="flex flex-column gap-4">
+            <div class="flex align-items-center justify-content-between">
+              <div class="flex align-items-center gap-2">
+                <span class="font-medium">Email Notifications</span>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Receive important updates via email"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-inputSwitch [(ngModel)]="notificationSettings.emailNotifications"></p-inputSwitch>
+            </div>
+  
+            <div class="flex align-items-center justify-content-between">
+              <div class="flex align-items-center gap-2">
+                <span class="font-medium">Push Notifications</span>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Receive real-time alerts on your device"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-inputSwitch [(ngModel)]="notificationSettings.pushNotifications"></p-inputSwitch>
+            </div>
+  
+            <div class="flex align-items-center justify-content-between">
+              <div class="flex align-items-center gap-2">
+                <span class="font-medium">Collaboration Requests</span>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Get notified when someone wants to share a ride"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-inputSwitch [(ngModel)]="notificationSettings.collaborationRequests"></p-inputSwitch>
+            </div>
+  
+            <div class="flex align-items-center justify-content-between">
+              <div class="flex align-items-center gap-2">
+                <span class="font-medium">Weekly Report</span>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Receive weekly summary of your carbon footprint and savings"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-inputSwitch [(ngModel)]="notificationSettings.weeklyReport"></p-inputSwitch>
+            </div>
+  
+            <div class="flex align-items-center justify-content-between">
+              <div class="flex align-items-center gap-2">
+                <span class="font-medium">Leaderboard Updates</span>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Get notified about changes in your ranking"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-inputSwitch [(ngModel)]="notificationSettings.leaderboardUpdates"></p-inputSwitch>
+            </div>
+  
+            <div class="flex align-items-center justify-content-between">
+              <div class="flex align-items-center gap-2">
+                <span class="font-medium">Carbon Alerts</span>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Receive alerts when your carbon footprint exceeds your goals"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-inputSwitch [(ngModel)]="notificationSettings.carbonAlerts"></p-inputSwitch>
+            </div>
+          </div>
+        </p-card>
+      </div>
+  
+      <!-- Preferences Card -->
+      <div class="col-12 md:col-6 lg:col-6 p-3">
+        <p-card header="Preferences" styleClass="h-full">
+          <div class="flex flex-column gap-4">
+            <!-- <div class="flex flex-column gap-2">
+              <div class="flex align-items-center gap-2">
+                <label class="font-medium">Default Transport Mode</label>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Choose your preferred mode of transport for route suggestions"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-dropdown [options]="transportModeOptions" [(ngModel)]="preferenceSettings.defaultTransportMode"
+                         [style]="{'width': '100%'}" optionLabel="label" optionValue="value">
+              </p-dropdown>
+            </div>
+   -->
+            <div class="flex flex-column gap-2">
+              <div class="flex align-items-center gap-2">
+                <label class="font-medium">Distance Unit</label>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Select your preferred unit of measurement"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-selectButton [options]="distanceUnitOptions" [(ngModel)]="preferenceSettings.distanceUnit"
+                             optionLabel="label" optionValue="value">
+              </p-selectButton>
+            </div>
+  
+            <div class="flex flex-column gap-2">
+              <div class="flex align-items-center gap-2">
+                <label class="font-medium">Maximum Collaboration Distance (km)</label>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Maximum distance you're willing to deviate for ride sharing"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-inputNumber [(ngModel)]="preferenceSettings.maxCollabDistance"
+                            [showButtons]="true" [min]="1" [max]="20" suffix=" km">
+              </p-inputNumber>
+            </div>
+  
+            <div class="flex flex-column gap-2">
+              <div class="flex align-items-center gap-2">
+                <label class="font-medium">Theme</label>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Choose your preferred app appearance"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-selectButton [options]="themeOptions" [(ngModel)]="preferenceSettings.theme"
+                             optionLabel="label" optionValue="value">
+              </p-selectButton>
+            </div>
+  
+            <div class="flex flex-column gap-2">
+              <div class="flex align-items-center gap-2">
+                <label class="font-medium">Language</label>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                   pTooltip="Select your preferred language"
+                   tooltipPosition="right"></i>
+              </div>
+              <p-dropdown [options]="languageOptions" [(ngModel)]="preferenceSettings.language"
+                         [style]="{'width': '100%'}" optionLabel="label" optionValue="value">
+              </p-dropdown>
+            </div>
+          </div>
+        </p-card>
+      </div>
+  
+      <!-- Data Management Card -->
+      <div class="col-12 md:col-6 lg:col-6 p-3">
+        <p-card header="Data Management" styleClass="h-full">
+          <div class="flex flex-column gap-4">
+            <div class="flex flex-column gap-2">
+              <div class="flex align-items-center gap-2">
+                <label class="font-medium">Data Retention Period</label>
+                <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                 pTooltip="Choose how long to keep your route history"
+                 tooltipPosition="right"></i>
+            </div>
+            <p-dropdown [options]="dataRetentionOptions" [(ngModel)]="dataRetentionPeriod"
+                       [style]="{'width': '100%'}" optionLabel="label" optionValue="value">
+            </p-dropdown>
+          </div>
+          
+          <p-divider></p-divider>
+          
+          <div class="flex flex-column gap-3">
+            <div class="flex align-items-center gap-2">
+              <p-button label="Download My Data" icon="pi pi-download" 
+                       severity="secondary" (onClick)="exportData()"
+                       pTooltip="Download all your data in a ZIP file"
+                       tooltipPosition="right"
+                       class="w-full">
+              </p-button>
+              <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                 pTooltip="Export all your routes, preferences, and usage statistics"
+                 tooltipPosition="left"></i>
+            </div>
+
+            <div class="flex align-items-center gap-2">
+              <p-button label="Delete Account" icon="pi pi-trash" 
+                       severity="danger" (onClick)="deleteAccount()"
+                       pTooltip="Permanently delete your account and all associated data"
+                       tooltipPosition="right"
+                       class="w-full">
+              </p-button>
+              <i class="pi pi-info-circle text-primary-500 cursor-pointer"
+                 pTooltip="This action cannot be undone"
+                 tooltipPosition="left"></i>
+            </div>
+          </div>
+        </div>
+      </p-card>
+    </div>
+  </div>
+</div>

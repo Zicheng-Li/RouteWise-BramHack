@@ -13,6 +13,8 @@ import { RippleModule } from 'primeng/ripple';
 import { ChatSidebarComponent } from './chat-sidebar/chat-sidebar.component';
 import { ChatBoxComponent } from './chat-box/chat-box.component';
 import { UserCardComponent } from './user-card/user-card.component';
+import { OnInit } from '@angular/core';
+import { IdentifierService } from 'src/app/services/config/identifier.service';
 
 @Component({
   selector: 'app-chats',
@@ -36,13 +38,17 @@ import { UserCardComponent } from './user-card/user-card.component';
   providers: [ChatService],
 })
 
-export class ChatsComponent implements OnDestroy {
+export class ChatsComponent implements OnDestroy, OnInit {
   subscription: Subscription;
   activeUser!: User;
 
 
-  constructor(private chatService: ChatService) {
+  constructor(private chatService: ChatService, private identifierService : IdentifierService) {
     this.subscription = this.chatService.activeUser$.subscribe((data) => (this.activeUser = data));
+  }
+
+  ngOnInit(): void {
+    this.identifierService.changeStates(false, false, true);
   }
 
   ngOnDestroy() {

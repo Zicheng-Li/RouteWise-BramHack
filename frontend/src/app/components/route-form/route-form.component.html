@@ -3,8 +3,16 @@
         <div class="grid gap-1 justify-content-center">
             <div class="col-5">
                 <p-inputGroup>
-                    <input type="text" pInputText placeholder="From" />
-                    <button type="button" pButton icon="pi pi-search" class="p-button-info"></button>
+                    <p-inputGroup>
+                        <input id="toLocation" type="text" pInputText placeholder="To" #inputField />
+
+                        <button
+                            type="button"
+                            pButton
+                            icon="pi pi-search"
+                            class="p-button-warning"
+                            ></button>
+                    </p-inputGroup>
                 </p-inputGroup>
             </div>
             <div class="col-5">
@@ -12,6 +20,14 @@
                     <input type="text" pInputText placeholder="To" />
                     <button type="button" pButton icon="pi pi-search" class="p-button-warning"></button>
                 </p-inputGroup>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="grid gap-1 justify-content-center">
+            <div class="col-10">
+                <google-map height="30vh" width="100%"></google-map>
             </div>
         </div>
     </div>

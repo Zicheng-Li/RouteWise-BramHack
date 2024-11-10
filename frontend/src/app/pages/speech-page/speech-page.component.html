@@ -1,0 +1,23 @@
+<div class="login-container">
+    <h2>Login</h2>
+    
+    <!-- Username Field -->
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" [(ngModel)]="username" id="username" placeholder="Enter your username" />
+      <button (click)="startListening('username')">🎤</button>
+    </div>
+    
+    <!-- Password Field -->
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" [(ngModel)]="password" id="password" placeholder="Enter your password" />
+      <button (click)="startListening('password')">🎤</button>
+    </div>
+    
+    <!-- Login Button -->
+    <button class="login-button">Login</button>
+    
+    <!-- Listening Status -->
+    <p *ngIf="isListening">Listening...</p>
+  </div>

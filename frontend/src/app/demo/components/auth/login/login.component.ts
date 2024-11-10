@@ -65,6 +65,8 @@ export class LoginComponent {
             return;
         }
 
+        this.authService.needsAssist(this.enableSpeech);
+
         this.authService.login(this.email, this.password).subscribe({
             next: (userId) => {
                 this.dataService.getData(userId);

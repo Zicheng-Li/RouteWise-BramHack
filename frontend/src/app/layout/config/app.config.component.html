@@ -11,7 +11,7 @@
                 <p-button label="Compare with Leader" [outlined]="true" [style]="{width : '100%'}" />
             </div>
             <div class="col-12">
-                <p-button label="Explore Collabs" [outlined]="true" [style]="{width : '100%'}" />
+                <p-button label="Explore Collabs" [outlined]="true" [style]="{width : '100%'}" (onClick)="suggestCollabs()" />
             </div>
         </div>
     }
@@ -26,7 +26,7 @@
                 <p-button label="Compare with Selected User" [outlined]="true" [style]="{width : '100%'}" />
             </div>
             <div class="col-12">
-                <p-button label="Explore Collabs with Friends" [outlined]="true" [style]="{width : '100%'}" />
+                <p-button label="Explore Collabs with Friends" [outlined]="true" [style]="{width : '100%'}" (onClick)="suggestCollabs()" />
             </div>
         </div>
     }
@@ -37,15 +37,15 @@
                 <p-button label="Analyze Portfolio" [outlined]="true" [style]="{width : '100%'}" (onClick)="analyzePortfolio()" />
             </div>
             <div class="col-12">
-                <p-button label="Explore Collabs" [outlined]="true" [style]="{width : '100%'}" />
+                <p-button label="Explore Collabs" [outlined]="true" [style]="{width : '100%'}" (onClick)="suggestCollabs()" />
             </div>
         </div>
     }
 
     @if(aiResponse) {
-        <div class="grid mt-5 border-round border-primary border-1">
+        <div class="grid mt-5 border-round border-primary border-1 fadein animation-duration-500">
             <div class="col-12">
-                <p>
+                <p class="font-semibond text-gray-700">
                     {{aiResponse}}
                 </p>
             </div>

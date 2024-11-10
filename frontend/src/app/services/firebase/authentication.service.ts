@@ -9,8 +9,11 @@ import { map, catchError } from "rxjs/operators";
 })
 export class AuthService {
 
-    userId : BehaviorSubject<string> = new BehaviorSubject<string>("");
+    private userId : BehaviorSubject<string> = new BehaviorSubject<string>("");
     userId$ : Observable<string> = this.userId.asObservable();
+
+    private voiceAssist : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    va$ : Observable<boolean> = this.voiceAssist.asObservable();
 
   firebaseAuth = inject(Auth);
   firestore = inject(Firestore);
@@ -65,5 +68,9 @@ export class AuthService {
     let response = this.firebaseAuth.currentUser?.uid ?? null;
     this.userId.next(response!);
     return response;
+  }
+
+  needsAssist(b : boolean) {
+    this.voiceAssist.next(true);
   }
 }

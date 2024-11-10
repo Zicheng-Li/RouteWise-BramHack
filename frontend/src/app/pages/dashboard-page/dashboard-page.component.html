@@ -9,8 +9,11 @@
                 </div>
             </div>
             <div class="flex gap-2 sm:ml-auto">
+                <button pButton pRipple type="button" icon="pi pi-plus" label="Add Work" class="p-button-outlined p-button-sm" pTooltip="Add Work" tooltipPosition="bottom" (click)="displayCarDialog()"></button>
+
                 <button pButton pRipple type="button" icon="pi pi-plus" label="Add Route" class="p-button-outlined p-button-sm" pTooltip="Add Route" tooltipPosition="bottom"
                 (click)="displayRouteDiag()"></button>
+
                 <button type="button" pButton pTooltip="Download" tooltipPosition="bottom" icon="pi pi-download" class="p-button-rounded p-button-outlined"></button>
                 <button type="button" pButton pTooltip="Share" tooltipPosition="bottom" icon="pi pi-send" class="p-button-rounded"></button>
             </div>
@@ -110,6 +113,9 @@
             <p-chart type="line" [data]="chartData" [options]="chartOptions"></p-chart>
         </div>
     </div>
+    <p-dialog header="Car Information" [(visible)]="displayCar" [modal]="true" showEffect="fade" [style]="{width: '60vw', height: '80vh'}" [breakpoints]="{'960px': '75vw', '640px': '90vw'}" [contentStyle]="{ overflow: 'auto' }">
+        <app-car></app-car>
+    </p-dialog>
 
     <p-dialog header="Route Info" [(visible)]="display" [modal]="true" showEffect="fade" [style]="{height : '65vh'}" [breakpoints]="{'960px': '75vw'}">
         <div class="grid">
@@ -122,6 +128,7 @@
                 <button pButton icon="pi pi-check" (click)="display=false" label="Create" class="p-button-outlined"></button>
         </ng-template>
     </p-dialog>
+
 
 </div>
 

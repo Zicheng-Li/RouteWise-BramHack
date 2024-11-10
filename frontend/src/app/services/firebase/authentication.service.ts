@@ -70,7 +70,7 @@ export class AuthService {
     return response;
   }
 
-  needsAssist(b : boolean) {
-    this.voiceAssist.next(true);
-  }
+  needsAssist(isEnabled: boolean) {
+    this.voiceAssist.next(isEnabled);
+}
 }

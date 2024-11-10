@@ -7,13 +7,14 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { RippleModule } from 'primeng/ripple';
 import { User } from 'src/app/demo/api/user';
 import { ChatService } from '../service/chat.service';
+import { Router } from '@angular/router'; 
+import { PaymentPageComponent } from '../../payment-page/payment-page.component';
 
 @Component({
   selector: 'app-chat-box',
   standalone: true,
-  imports: [CommonModule, FormsModule, InputTextModule, ButtonModule, OverlayPanelModule, RippleModule],
+  imports: [CommonModule, FormsModule, InputTextModule, ButtonModule, OverlayPanelModule, RippleModule, PaymentPageComponent],
   templateUrl: './chat-box.component.html',
- 
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatBoxComponent implements OnInit {
@@ -25,7 +26,8 @@ export class ChatBoxComponent implements OnInit {
     '😀', '😃', '😄', '😁', '😆', '😅', '😂', '🤣', '😇', '😉', '😊', '🙂', '🙃', '😋', '😌', '😍', '🥰', '😘', '😗', '😙', '😚'
   ];
 
-  constructor(private chatService: ChatService) {}
+  // Inject both ChatService and Router here
+  constructor(private chatService: ChatService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -47,5 +49,9 @@ export class ChatBoxComponent implements OnInit {
 
   parseDate(timestamp: number) {
     return new Date(timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  }
+
+  goToPaymentPage() {
+    this.router.navigate(['user/payment']);
   }
 }

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MenuService } from '../app.menu.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { analyzePortfolioPrompt } from 'src/app/helpers/prompt';
+import { analyzePortfolioPrompt, suggestCollaborations } from 'src/app/helpers/prompt';
 
 import {
     ColorScheme,
@@ -12,6 +12,7 @@ import {
 import { IdentifierService } from 'src/app/services/config/identifier.service';
 import { DataService } from 'src/app/services/firebase/data.service';
 import { AiService } from 'src/app/services/ai/ai.service';
+import { AuthService } from 'src/app/services/firebase/authentication.service';
 
 @Component({
     selector: 'app-config',
@@ -48,7 +49,8 @@ export class AppConfigComponent implements OnInit {
         private router : Router,
         private identifierService : IdentifierService,
         private dataService : DataService,
-        private aiService : AiService
+        private aiService : AiService,
+        private authService : AuthService
     ) {}
 
     analyzePortfolio() {
@@ -58,6 +60,20 @@ export class AppConfigComponent implements OnInit {
         this.aiService.generateText(prompt).subscribe((res) => {
             this.aiResponse = res.choices[0].message.content;
         });
+    }
+
+    suggestCollabs() {
+        this.authService.userId$.subscribe({
+            next : (res) => {
+                this.dataService.getRouteExceptCurrent(res).then((data) => {
+                    let prompt = suggestCollaborations(this.user, data);
+                    this.aiService.generateText(prompt).subscribe((res) => {
+                        this.aiResponse = res.choices[0].message.content;
+                        }
+                    )
+                })
+            }
+        })
     }
 
     get visible(): boolean {

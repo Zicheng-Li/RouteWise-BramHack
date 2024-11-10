@@ -2,22 +2,22 @@
     "data": [
         {
             "id": 1,
-            "name": "Ioni Bowcher",
+            "name": "Sydney Sweeney",
             "image": "ionibowcher.png",
             "status": "active",
             "messages": [
                 {
-                    "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                    "text": "Hey, I'm thinking about starting a carpool from Oshawa to Bowmanville to cut down on emissions. Interested?",
                     "ownerId": 1,
                     "createdAt": 1652646338240
                 },
                 {
-                    "text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                    "text": "I calculated that we could save up to 20 kg of CO2 emissions weekly by carpooling. Let's do this!",
                     "ownerId": 1,
                     "createdAt": 1652646368718
                 },
                 {
-                    "text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                    "text": "That's amazing! Count me in. I will make the money transfer right away!",
                     "ownerId": 123,
                     "createdAt": 1652646368718
                 }
@@ -31,18 +31,18 @@
             "status": "away",
             "messages": [
                 {
-                    "text":  "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat",
+                    "text": "Hey, my carpool score is better than yours this week. I've reduced 30% more emissions than you.",
                     "ownerId": 1,
                     "createdAt": 1652646338240
                 },
                 {
-                    "text": "Consequat mauris nunc congue nisi vitae suscipit.",
-                    "ownerId": 1,
+                    "text": "Haha, I was slacking a bit this week. Wait until next week—I’ll beat you for sure!",
+                    "ownerId": 123,
                     "createdAt": 1652646368718
                 },
                 {
-                    "text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                    "ownerId": 123,
+                    "text": "We'll see! Don't forget, it’s all about teamwork and saving the planet.",
+                    "ownerId": 1,
                     "createdAt": 1652646368718
                 }
             ],
@@ -55,18 +55,18 @@
             "status": "busy",
             "messages": [
                 {
-                    "text":  "Duis aute irure dolor in reprehenderit",
+                    "text": "Would you be up for a carpool to downtown Toronto? Driving solo feels wasteful.",
                     "ownerId": 1,
                     "createdAt": 1652646338240
                 },
                 {
-                    "text": "Adipiscing tristique risus nec feugiat in fermentum posuere urna nec.",
-                    "ownerId": 1,
+                    "text": "Sure, let's do it. Also, have you checked your emissions score this week? I’m pretty high on the leaderboard.",
+                    "ownerId": 123,
                     "createdAt": 1652646368718
                 },
                 {
-                    "text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                    "ownerId": 123,
+                    "text": "Not yet! But I’ll check later—sounds like I’ve got some catching up to do.",
+                    "ownerId": 1,
                     "createdAt": 1652646368718
                 }
             ],
@@ -79,17 +79,17 @@
             "status": "active",
             "messages": [
                 {
-                    "text":  "Ut enim ad minim veniam",
+                    "text": "I'm looking for a carpool buddy for my commute from Ajax to Scarborough. Who’s interested?",
                     "ownerId": 1,
                     "createdAt": 1652646338240
                 },
                 {
-                    "text": "Quis nostrud exercitation ullamco laboris nisi ut",
+                    "text": "We could potentially reduce our individual emissions by half if we share a ride.",
                     "ownerId": 1,
                     "createdAt": 1652646368718
                 },
                 {
-                    "text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                    "text": "Count me in! Sharing a ride is a win-win for the planet and our wallets.",
                     "ownerId": 123,
                     "createdAt": 1652646368718
                 }
@@ -97,24 +97,24 @@
             "lastSeen": "2d"
         },
         {
-            "id": 4,
+            "id": 5,
             "name": "Onyama Limba",
             "image": "onyamalimba.png",
             "status": "busy",
             "messages": [
                 {
-                    "text":  "Culpa qui officia deserunt mollit anim id est laborum",
+                    "text": "Hey, are you keeping up with your carpool stats? I’ve reduced my CO2 emissions by 25% this month.",
                     "ownerId": 1,
                     "createdAt": 1652646338240
                 },
                 {
-                    "text": "Excepteur sint occaecat cupidatat non proident",
-                    "ownerId": 1,
+                    "text": "That’s impressive! I’m at 20% right now, but I’ve got some longer trips coming up.",
+                    "ownerId": 123,
                     "createdAt": 1652646368718
                 },
                 {
-                    "text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
-                    "ownerId": 123,
+                    "text": "Nice! Let’s both aim for 30% next month—friendly competition keeps it fun.",
+                    "ownerId": 1,
                     "createdAt": 1652646368718
                 }
             ],

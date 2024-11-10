@@ -9,8 +9,11 @@ import { map, catchError } from "rxjs/operators";
 })
 export class AuthService {
 
-    userId : BehaviorSubject<string> = new BehaviorSubject<string>("");
+    private userId : BehaviorSubject<string> = new BehaviorSubject<string>("");
     userId$ : Observable<string> = this.userId.asObservable();
+
+    private voiceAssist : BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    va$ : Observable<boolean> = this.voiceAssist.asObservable();
 
   firebaseAuth = inject(Auth);
   firestore = inject(Firestore);
@@ -31,7 +34,8 @@ export class AuthService {
           totalEmission: 0, // Initialize to zero
           totalCost: 0,
           totalTime: 0,
-          totalDistance: 0
+          totalDistance: 0,
+          email: email
         }).then(() => userCredential); // Return the user credential after Firestore insert
       } else {
         throw new Error("User ID is undefined.");
@@ -65,4 +69,8 @@ export class AuthService {
     this.userId.next(response!);
     return response;
   }
+
+  needsAssist(isEnabled: boolean) {
+    this.voiceAssist.next(isEnabled);
+}
 }

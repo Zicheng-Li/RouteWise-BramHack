@@ -11,6 +11,7 @@ import { RegisterComponent } from './demo/components/auth/register/register.comp
 import { LoginComponent } from './demo/components/auth/login/login.component';
 import { SpeechPageComponent } from './pages/speech-page/speech-page.component';
 import { TextPageComponent } from './pages/text-page/text-page.component';
+import { PaymentPageComponent } from './subpages/payment-page/payment-page.component';
 
 
 const routerOptions: ExtraOptions = {
@@ -49,7 +50,7 @@ const routes: Routes = [
                 ]
             },
             {
-                path : 'settings',
+                path : 'user/settings',
                 component : SettingsPageComponent,
                 data : { breadcrumb: 'Settings'}
             },
@@ -67,7 +68,12 @@ const routes: Routes = [
                 path : 'text',
                 component : TextPageComponent,
                 data : { breadcrumb: 'text to speech'}
+            },{
+                path: 'payment',
+                component: PaymentPageComponent,
+                data: { breadcrumb: 'Payment Page' }
             },
+
 
 
 
@@ -104,6 +110,7 @@ const routes: Routes = [
     { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
     { path: 'notfound', loadChildren: () => import('./demo/components/notfound/notfound.module').then(m => m.NotfoundModule) },
     { path: '**', redirectTo: '/notfound' }
+
 ];
 
 @NgModule({

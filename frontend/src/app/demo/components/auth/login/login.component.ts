@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
@@ -8,7 +8,7 @@ import { DataService } from 'src/app/services/firebase/data.service';
 @Component({
     templateUrl: './login.component.html',
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
     rememberMe: boolean = false;
     email: string = '';
     password: string = '';
@@ -50,6 +50,11 @@ export class LoginComponent {
             this.listeningField = null;
         });
     }
+    ngOnInit(): void {
+        this.authService.va$.subscribe((res) => {
+            this.enableSpeech = res;
+        });
+    }
 
     get dark(): boolean {
         return this.layoutService.config().colorScheme !== 'light';
@@ -65,6 +70,8 @@ export class LoginComponent {
             return;
         }
 
+        this.authService.needsAssist(this.enableSpeech);
+
         this.authService.login(this.email, this.password).subscribe({
             next: (userId) => {
                 this.dataService.getData(userId);
@@ -77,6 +84,7 @@ export class LoginComponent {
             }
         });
     }
+
 
     startListening(field: 'email' | 'password') {
         this.isListening = true;

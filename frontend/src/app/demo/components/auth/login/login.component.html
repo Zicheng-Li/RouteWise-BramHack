@@ -5,30 +5,78 @@
     <path [attr.fill]="dark ? 'var(--primary-600)' : 'var(--primary-200)'" d="M454.9 86.3C600.7 177 751.6 269.3 924.1 325c208.6 67.4 431.3 60.8 637.9-5.3c12.8-4.1 25.4-8.4 38.1-12.9V0H288.1c56 21.3 108.7 50.6 159.7 82C450.2 83.4 452.5 84.9 454.9 86.3z"/>
     <path [attr.fill]="dark ? 'var(--primary-500)' : 'var(--primary-100)'" d="M1397.5 154.8c47.2-10.6 93.6-25.3 138.6-43.8c21.7-8.9 43-18.8 63.9-29.5V0H643.4c62.9 41.7 129.7 78.2 202.1 107.4C1020.4 178.1 1214.2 196.1 1397.5 154.8z"/>
 </svg>
-<div class="px-5 min-h-screen flex justify-content-center align-items-center">
-    <div class="border-1 surface-border surface-card border-round py-7 px-4 md:px-7 z-1">
-        <div class="mb-4">
-            <div class="text-900 text-xl font-bold mb-2">Log in</div>
-            <span class="text-600 font-medium">Please enter your details</span>
+
+<div class="login-container px-5 min-h-screen flex justify-content-center align-items-center">
+    <div class="login-card border-1 surface-border surface-card border-round py-7 px-4 md:px-7 z-1 shadow-lg">
+        <div class="mb-4 text-center">
+            <h1 class="text-900 text-2xl font-bold">Welcome Back</h1>
+            <p class="text-600 font-medium">Log in to access your account</p>
         </div>
-        <div class="flex flex-column">
+
+        <div class="form-group">
+            <label for="email" class="sr-only">Email</label>
             <span class="p-input-icon-left w-full mb-4">
                 <i class="pi pi-envelope"></i>
-                <input id="email" type="text" pInputText class="w-full md:w-25rem" placeholder="Email" [(ngModel)]="email">
+                <input 
+                    id="email" 
+                    type="text" 
+                    pInputText 
+                    class="w-full md:w-25rem p-inputtext-sm" 
+                    placeholder="Email" 
+                    [(ngModel)]="email" 
+                    aria-label="Email"
+                >
+                <button 
+                    (click)="startListening('email')" 
+                    aria-label="Start voice input for email" 
+                    class="voice-button" 
+                    [class.active]="isListening && listeningField === 'email'"
+                >
+                    🎤
+                </button>
             </span>
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="sr-only">Password</label>
             <span class="p-input-icon-left w-full mb-4">
                 <i class="pi pi-lock"></i>
-                <input id="password" type="password" pInputText class="w-full md:w-25rem" placeholder="Password" [(ngModel)]="password">
+                <input 
+                    id="password" 
+                    type="password" 
+                    pInputText 
+                    class="w-full md:w-25rem p-inputtext-sm" 
+                    placeholder="Password" 
+                    [(ngModel)]="password" 
+                    aria-label="Password"
+                >
+                <button 
+                    (click)="startListening('password')" 
+                    aria-label="Start voice input for password" 
+                    class="voice-button" 
+                    [class.active]="isListening && listeningField === 'password'"
+                >
+                    🎤
+                </button>
             </span>
-            <div class="mb-4 flex flex-wrap gap-3">
-                <div>
-                    <p-checkbox name="checkbox" value="val" [(ngModel)]="rememberMe" styleClass="mr-2" [binary]="true"></p-checkbox>
-                    <label for="checkbox" class="text-900 font-medium mr-8">Remember Me</label>
-                </div>
-                <a class="text-600 cursor-pointer hover:text-primary cursor-pointer ml-auto transition-colors transition-duration-300">Reset password</a>
-            </div>
-            <button pButton pRipple label="Log In" class="w-full" (click)="onSubmit()"></button>
         </div>
+
+        <div class="mb-4 flex items-center gap-3">
+            <p-checkbox 
+                name="checkbox" 
+                value="val" 
+                [(ngModel)]="rememberMe" 
+                styleClass="mr-2" 
+                [binary]="true" 
+                aria-label="Remember Me"
+            ></p-checkbox>
+            <label for="checkbox" class="text-900 font-medium">Remember Me</label>
+            <a class="text-600 ml-auto font-medium hover:text-primary transition-colors transition-duration-300">Forgot password?</a>
+        </div>
+
+        <button pButton pRipple label="Log In" class="login-button w-full" (click)="onSubmit()"></button>
+
+        <p *ngIf="isListening" class="listening-status">Listening...</p>
     </div>
 </div>
 

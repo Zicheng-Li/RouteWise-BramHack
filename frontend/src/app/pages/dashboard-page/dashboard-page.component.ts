@@ -96,6 +96,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
           distance: 18,
           emission: 7,
           cost: 12,
+          time: 30,
           frequency: [1, 1, 1, 1, 1, 0, 0],
           car: this.cars[0]  // "green machine"
         },
@@ -107,6 +108,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
           emission: 12,
           cost: 25,
           frequency: [1, 1, 1, 1, 1, 1, 0],
+          time: 20,
           car: this.cars[1]  // "fastback"
         },
         {
@@ -116,6 +118,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
           distance: 10,
           emission: 3,
           cost: 8,
+          time: 50,
           frequency: [0, 0, 1, 1, 1, 0, 0],
           car: this.cars[2]  // "quiet cruiser"
         }
@@ -137,6 +140,36 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
         this.dataService.user$.subscribe((res) => {
             this.user = res;
             console.log(this.user);
+  
+        // this.routes.forEach((route) => {
+        //     // Upload car data first
+        //     this.uploadService.uploadCar("J69hAKRxOxWzhusH0b6CwmSycwC2", route.car)
+        //       .then(() => {
+        //         console.log(`Car "${route.car.name}" uploaded successfully.`);
+        //       })
+        //       .catch((error) => {
+        //         console.error(`Error uploading car "${route.car.name}":`, error);
+        //       });
+      
+        //     // Upload route data after the car
+        //     this.uploadService.uploadRoute("J69hAKRxOxWzhusH0b6CwmSycwC2", route)
+        //       .then(() => {
+        //         console.log(`Route "${route.name}" uploaded successfully.`);
+        //       })
+        //       .catch((error) => {
+        //         console.error(`Error uploading route "${route.name}":`, error);
+        //       });
+        //   });
+        
+
+        // this.dataService.getData("J69hAKRxOxWzhusH0b6CwmSycwC2").subscribe({
+        //     next: (data) => {
+        //       console.log('User Data:', data);
+        //     },
+        //     error: (error) => {
+        //       console.error('Error fetching data:', error);
+        //     }
+        //   });
         })
 
         this.identifierService.changeStates(true, false, false);

@@ -9,6 +9,9 @@ import { ChatsComponent } from './subpages/chats/chats.component';
 import { InfoPageComponent } from './pages/info-page/info-page.component';
 import { RegisterComponent } from './demo/components/auth/register/register.component';
 import { LoginComponent } from './demo/components/auth/login/login.component';
+import { SpeechPageComponent } from './pages/speech-page/speech-page.component';
+import { TextPageComponent } from './pages/text-page/text-page.component';
+
 
 const routerOptions: ExtraOptions = {
     anchorScrolling: 'enabled'
@@ -54,6 +57,16 @@ const routes: Routes = [
                 path : 'info',
                 component : InfoPageComponent,
                 data : { breadcrumb: 'Information'},
+            },
+            {
+                path : 'speech',
+                component : SpeechPageComponent,
+                data : { breadcrumb: 'Speech to Text'}
+            },
+            {
+                path : 'text',
+                component : TextPageComponent,
+                data : { breadcrumb: 'text to speech'}
             },
 
 

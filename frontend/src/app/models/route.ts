@@ -6,6 +6,7 @@ export interface Route{
 	cost : number;
 	distance : number;
 	emission : number;
+	time: number;
 	frequency : number[];
 	from : string;
 	to : string;

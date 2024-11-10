@@ -35,17 +35,6 @@
     </div>
 
     <div class="col-12">
-        <div class="grid gap-1 justify-content-center">
-            <div class="col-5">
-                <input type="text" pInputText [(ngModel)]="name" placeholder="Route Name"/>
-            </div>
-            <div class="col-5">
-                <p-chip label="Distance : " [style]="{height: '100%', width : '100%'}" />
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12">
         <div class="grid justify-content-center">
             <div class="col-10">
                 <p-multiSelect
@@ -55,7 +44,6 @@
         placeholder="Select Days" [style]="{width:'100%'}"/>
             </div>
         </div>
-
     </div>
 
     <div class="col-12">
@@ -67,6 +55,17 @@
                 optionLabel="name"
                 placeholder="Select a Vehicle"
                 [style]="{width:'100%'}" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="grid gap-1 justify-content-center">
+            <div class="col-5">
+                <input type="text" pInputText [(ngModel)]="name" placeholder="Route Name"/>
+            </div>
+            <div class="col-5">
+                <p-chip label="Distance : {{distance}}" [style]="{height: '100%', width : '100%'}" />
             </div>
         </div>
     </div>

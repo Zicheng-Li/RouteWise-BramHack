@@ -7,6 +7,8 @@ import { SocialPageComponent } from './pages/social-page/social-page.component';
 import { LeaderboardComponent } from './subpages/leaderboard/leaderboard.component';
 import { ChatsComponent } from './subpages/chats/chats.component';
 import { InfoPageComponent } from './pages/info-page/info-page.component';
+import { RegisterComponent } from './demo/components/auth/register/register.component';
+import { LoginComponent } from './demo/components/auth/login/login.component';
 
 const routerOptions: ExtraOptions = {
     anchorScrolling: 'enabled'
@@ -14,9 +16,13 @@ const routerOptions: ExtraOptions = {
 
 const routes: Routes = [
     {
-        path: '', component: AppLayoutComponent,
+        path: '',
+        redirectTo: 'auth/register',
+        pathMatch: 'full'
+    },
+    {
+        path: 'user', component: AppLayoutComponent,
         children: [
-
             {
                 path : '',
                 component : DashboardPageComponent,

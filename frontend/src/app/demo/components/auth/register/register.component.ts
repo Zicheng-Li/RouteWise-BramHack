@@ -17,10 +17,16 @@ export class RegisterComponent {
     router = inject(Router);
     messageService = inject(MessageService);
 
+    canSubmit : boolean = false;
+
     constructor(private layoutService: LayoutService) {}
 
     get dark(): boolean {
         return this.layoutService.config().colorScheme !== 'light';
+    }
+
+    verifySubmit() {
+        this.canSubmit = ((this.email != "") && (this.firstName != "") && (this.password != "" )&& (this.lastName != ""));
     }
 
     onSubmit(): void {
@@ -49,8 +55,14 @@ export class RegisterComponent {
             return;
         }
 
-        this.authService.register(this.email, this.password, this.firstName, this.lastName).subscribe(() => {
-            this.router.navigateByUrl('auth/login');
-        });
+        this.authService.register(this.email, this.password, this.firstName, this.lastName).subscribe({
+            next : () => {
+                this.router.navigateByUrl('auth/login');
+            },
+            error : () => {
+                this.messageService.add({severity:'error', summary: 'Error', detail: 'Some error occured.'});
+            }
+        }
+        );
     }
 }

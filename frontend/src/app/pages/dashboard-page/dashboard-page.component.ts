@@ -14,6 +14,8 @@ import { DialogModule } from 'primeng/dialog';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { RouteFormComponent } from "../../components/route-form/route-form.component";
+import { CarComponent } from "../../components/car/car.component";
+
 
 interface MonthlyPayment {
     name?: string;
@@ -35,7 +37,7 @@ interface MonthlyPayment {
     InputNumberModule,
     ChartModule,
     ConfirmDialogModule,
-    OverlayPanelModule, RouteFormComponent],
+    OverlayPanelModule, RouteFormComponent, CarComponent],
   templateUrl: './dashboard-page.component.html',
   styleUrl: './dashboard-page.component.scss'
 })
@@ -50,6 +52,9 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     subscription: Subscription;
 
     display : boolean = false;
+
+    displayCar: boolean = false;
+
 
     constructor(private layoutService: LayoutService) {
         this.subscription = this.layoutService.configUpdate$
@@ -188,5 +193,8 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
     displayRouteDiag() {
         this.display = !this.display;
+    }
+    displayCarDialog() {
+        this.displayCar = !this.displayCar;
     }
 }

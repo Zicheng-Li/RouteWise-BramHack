@@ -1,0 +1,113 @@
+:host {
+    display: block;
+    min-height: 100vh;
+    background-color: #f8faf8;
+    padding: 2rem;
+  }
+  
+  .payment-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background: white;
+    padding: 2.5rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  }
+  
+  .card-icons {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    
+    img {
+      height: 30px;
+      opacity: 0.5;
+      transition: opacity 0.3s;
+      
+      &.active {
+        opacity: 1;
+      }
+    }
+  }
+  
+  .form-title {
+    color: #1a202c;
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .form-group {
+    margin-bottom: 1.5rem;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #4a5568;
+    font-weight: 500;
+    font-size: 0.9rem;
+  }
+  
+  input {
+    width: 100%;
+    padding: 0.875rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.2s;
+    background-color: #f8fafc;
+    
+    &:focus {
+      outline: none;
+      border-color: #68d391;
+      background-color: white;
+      box-shadow: 0 0 0 3px rgba(104, 211, 145, 0.1);
+    }
+  }
+  
+  .submit-button {
+    width: 100%;
+    background-color: #68d391;
+    color: white;
+    padding: 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-top: 1rem;
+    
+    &:hover {
+      background-color: #48bb78;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 6px rgba(104, 211, 145, 0.1);
+    }
+  }
+  
+  .card-row {
+    display: flex;
+    gap: 1rem;
+    
+    .form-group {
+      flex: 1;
+    }
+  }
+  
+  // Card type indicator styles
+  .card-number-container {
+    position: relative;
+    
+    .card-type {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      
+      img {
+        height: 24px;
+      }
+    }
+  }

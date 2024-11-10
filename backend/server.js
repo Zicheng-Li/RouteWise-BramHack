@@ -12,7 +12,7 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
-const GOOGLE_MAPS_API_KEY = '***REMOVED***';
+const GOOGLE_MAPS_API_KEY = '';
 
 app.post('/directions', async (req, res) => {
   try {

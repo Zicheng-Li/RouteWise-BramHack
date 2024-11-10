@@ -99,7 +99,8 @@ export class RouteFormComponent implements OnInit {
         emission: this.emission,
         frequency: [0, 1, 1, 0, 0, 1, 1],
         from: this.from,
-        to: this.to
+        to: this.to,
+        time: 15
     }
 
     this.uploadService.uploadRoute(this.userId, route).then(() => alert("Route Added!")).catch(() => alert("some error occured."))

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
@@ -15,6 +15,7 @@ import { ChipModule } from 'primeng/chip';
 import { ViewChild } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { LocationService } from 'src/app/services/maps/location.service';
+import { DistanceService } from 'src/app/services/maps/distance.service';
 
 @Component({
   selector: 'app-route-form',
@@ -37,12 +38,13 @@ import { LocationService } from 'src/app/services/maps/location.service';
   templateUrl: './route-form.component.html',
   styleUrls: ['./route-form.component.scss'],
 })
-export class RouteFormComponent {
+export class RouteFormComponent implements OnInit {
 
   value = '';
   from: any = '';
   to: any = '';
   name: any = '';
+  distance : any = {};
 
   selectedDays: [] = [];
   selectedCar = {};
@@ -65,21 +67,41 @@ export class RouteFormComponent {
     { name: 'Porsche', code: 'LDN' },
   ];
 
-  constructor( private locationService : LocationService) {}
+  constructor( private locationService : LocationService, private distanceService : DistanceService) {}
+
+  ngOnInit(): void {
+      this.distanceService.disResponse$.subscribe((res) => {
+        this.distance = res;
+        console.log(res);
+      })
+  }
 
   getLocationSuggestions(query : string, toOrFrom : boolean) {
     this.locationService.searchPlaces(query).subscribe({
         next : (res) => {
             if(toOrFrom) {
                 this.to = res.places[0].formattedAddress;
+                console.log(res);
             }
             else {
                 this.from = res.places[0].formattedAddress;
+                console.log(res);
             }
         },
         error : (err : Error) => {
             alert(err);
+        },
+        complete : () => {
+            if(this.to && this.from) {
+                this.getDistance();
+            }
         }
     })
   }
+
+  getDistance() {
+    this.distanceService.getDirections(this.from, this.to).subscribe();
+  }
+
+
 }

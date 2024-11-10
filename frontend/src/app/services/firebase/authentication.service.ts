@@ -1,6 +1,6 @@
 import { Injectable, inject } from "@angular/core";
 import { Auth, createUserWithEmailAndPassword, UserCredential, signInWithEmailAndPassword } from "@angular/fire/auth";
-import { Observable, from } from "rxjs";
+import { BehaviorSubject, Observable, from } from "rxjs";
 import { Firestore, collection, addDoc } from "@angular/fire/firestore";
 import { map, catchError } from "rxjs/operators";
 
@@ -8,6 +8,10 @@ import { map, catchError } from "rxjs/operators";
   providedIn: "root"
 })
 export class AuthService {
+
+    userId : BehaviorSubject<string> = new BehaviorSubject<string>("");
+    userId$ : Observable<string> = this.userId.asObservable();
+
   firebaseAuth = inject(Auth);
   firestore = inject(Firestore);
 
@@ -17,7 +21,7 @@ export class AuthService {
 
       if (uid) {
         const usersCollection = collection(this.firestore, 'users');
-        
+
         // Add user info to Firestore with additional fields
         return addDoc(usersCollection, {
           uid: uid,
@@ -45,7 +49,9 @@ export class AuthService {
         if (!userCredential || !userCredential.user) {
           throw new Error("UserCredential or user is undefined");
         }
-        return userCredential.user.uid;
+        let response = userCredential.user.uid;
+        this.userId.next(response);
+        return response;
       }),
       catchError((error) => {
         console.error("Login failed:", error);  // Log the error for debugging
@@ -55,6 +61,8 @@ export class AuthService {
   }
 
   getUserId(): string | null {
-    return this.firebaseAuth.currentUser?.uid ?? null;
+    let response = this.firebaseAuth.currentUser?.uid ?? null;
+    this.userId.next(response!);
+    return response;
   }
 }

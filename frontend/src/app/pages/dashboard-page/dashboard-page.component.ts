@@ -23,6 +23,7 @@ import { Car } from 'src/app/models/car';
 import { AiService } from 'src/app/services/ai/ai.service';
 import { IdentifierService } from 'src/app/services/config/identifier.service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { AuthService } from 'src/app/services/firebase/authentication.service';
 
 interface MonthlyPayment {
     name?: string;
@@ -54,7 +55,11 @@ interface MonthlyPayment {
 export class DashboardPageComponent implements OnInit, OnDestroy {
 
     user : any;
+    userId : any;
     chartData: any;
+
+    routeModel! : Route;
+    carModel! : Car;
 
     chartOptions: any;
 
@@ -125,7 +130,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
       ];
 
     constructor(private layoutService: LayoutService, private dataService: DataService ,private aiService : AiService, private identifierService : IdentifierService
-        ,private uploadService : UploadService) {
+        ,private uploadService : UploadService, private authService : AuthService) {
 
 
         this.subscription = this.layoutService.configUpdate$
@@ -137,10 +142,15 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
+        this.authService.userId$.subscribe((res) => {
+            this.userId = res;
+            console.log(this.userId);
+        })
+
         this.dataService.user$.subscribe((res) => {
             this.user = res;
             console.log(this.user);
-  
+
         // this.routes.forEach((route) => {
         //     // Upload car data first
         //     this.uploadService.uploadCar("J69hAKRxOxWzhusH0b6CwmSycwC2", route.car)
@@ -150,7 +160,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
         //       .catch((error) => {
         //         console.error(`Error uploading car "${route.car.name}":`, error);
         //       });
-      
+
         //     // Upload route data after the car
         //     this.uploadService.uploadRoute("J69hAKRxOxWzhusH0b6CwmSycwC2", route)
         //       .then(() => {
@@ -160,7 +170,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
         //         console.error(`Error uploading route "${route.name}":`, error);
         //       });
         //   });
-        
+
 
         // this.dataService.getData("J69hAKRxOxWzhusH0b6CwmSycwC2").subscribe({
         //     next: (data) => {
@@ -204,6 +214,15 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
                 date: '20/04/2022',
             },
         ];
+    }
+
+    uploadRoute() {
+        this.uploadService.uploadRoute(this.userId, this.routeModel).then(() => alert("Route Added!")).catch(() => alert("some error occured."));
+    }
+
+    handleRouteEmit(event : any) {
+        this.routeModel = event;
+        console.log(this.routeModel);
     }
 
     initChart() {

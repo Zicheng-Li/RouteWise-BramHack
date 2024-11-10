@@ -4,7 +4,7 @@
             <div class="col-5">
                 <p-inputGroup>
                     <p-inputGroup>
-                        <input id="toLocation" type="text" pInputText placeholder="To" #inputField [(ngModel)]="to"/>
+                        <input id="toLocation" type="text" (ngModelChange)="emitRouteModel()" pInputText placeholder="To" #inputField [(ngModel)]="to"/>
 
                         <button
                             type="button"
@@ -19,7 +19,7 @@
             </div>
             <div class="col-5">
                 <p-inputGroup>
-                    <input type="text" pInputText placeholder="To" [(ngModel)]="from"/>
+                    <input type="text" pInputText placeholder="To" (ngModelChange)="emitRouteModel()" [(ngModel)]="from"/>
                     <button type="button" pButton icon="pi pi-search" class="p-button-warning" (click)="getLocationSuggestions(from, false)"></button>
                 </p-inputGroup>
             </div>
@@ -41,7 +41,7 @@
         [options]="days"
         [(ngModel)]="selectedDays"
         optionLabel="name"
-        placeholder="Select Days" [style]="{width:'100%'}"/>
+        placeholder="Select Days" [style]="{width:'100%'}" (ngModelChange)="emitRouteModel()"/>
             </div>
         </div>
     </div>
@@ -51,6 +51,7 @@
             <div class="col-10">
                 <p-dropdown
                 [options]="cars"
+                (ngModelChange)="emitRouteModel()"
                 [(ngModel)]="selectedCar"
                 optionLabel="name"
                 placeholder="Select a Vehicle"
@@ -62,7 +63,7 @@
     <div class="col-12">
         <div class="grid gap-1 justify-content-center">
             <div class="col-5">
-                <input type="text" pInputText [(ngModel)]="name" placeholder="Route Name"/>
+                <input type="text" pInputText (ngModelChange)="emitRouteModel()" [(ngModel)]="name" placeholder="Route Name"/>
             </div>
             <div class="col-5">
                 <p-chip label="Distance : {{distance}}" [style]="{height: '100%', width : '100%'}" />

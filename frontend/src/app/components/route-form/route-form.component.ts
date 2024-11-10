@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { DropdownModule } from 'primeng/dropdown';
 import { ButtonModule } from 'primeng/button';
@@ -50,12 +50,14 @@ export class RouteFormComponent implements OnInit {
   name: any = '';
   distance : any = "0 kms";
   userId : any = "";
-  cost : number = 0;
+  cost : number = 12;
   emission : number = 0;
   time : string = "";
 
   selectedDays: [] = [];
   selectedCar! : Car | null;
+
+  @Output() routeModelEmitter : EventEmitter<Route> = new EventEmitter<Route>();
 
   autocomplete : google.maps.places.Autocomplete | undefined;
 
@@ -89,21 +91,23 @@ export class RouteFormComponent implements OnInit {
       })
   }
 
-  addRoute() {
+  emitRouteModel() {
 
-    const route : Route = {
-        name: this.name,
-        cost: this.cost,
-        car: this.selectedCar!,
-        distance: this.distance,
-        emission: this.emission,
-        frequency: [0, 1, 1, 0, 0, 1, 1],
-        from: this.from,
-        to: this.to,
-        time: 15
+    if(this.name != "" && this.cost != 0 && this.selectedCar != null && this.from != "" && this.to != "" && this.time != "") {
+        const route : Route = {
+            name: this.name,
+            cost: this.cost,
+            car: this.selectedCar!,
+            distance: parseInt(this.distance.split(' ')[0], 10),
+            emission: this.emission,
+            frequency: [0, 1, 1, 0, 0, 1, 1],
+            from: this.from,
+            to: this.to,
+            time: parseInt(this.time.split(' ')[0], 10)
+        }
+
+        this.routeModelEmitter.emit(route);
     }
-
-    this.uploadService.uploadRoute(this.userId, route).then(() => alert("Route Added!")).catch(() => alert("some error occured."))
   }
 
   getLocationSuggestions(query : string, toOrFrom : boolean) {

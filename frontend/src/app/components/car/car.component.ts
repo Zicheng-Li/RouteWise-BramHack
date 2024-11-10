@@ -1,10 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { ChipModule } from 'primeng/chip';
+import { UploadService } from 'src/app/services/firebase/upload.service';
+import { DataService } from 'src/app/services/firebase/data.service';
+import { AuthService } from 'src/app/services/firebase/authentication.service';
 
 interface Car {
     year: number;
@@ -28,12 +31,15 @@ interface Car {
     templateUrl: './car.component.html',
     styleUrls: ['./car.component.scss'],
 })
-export class CarComponent {
+export class CarComponent implements OnInit {
     selectedYear: number | null = null;
     selectedMake: string | null = null;
     selectedModel: string | null = null;
     selectedCarName: string | null = null;
     efficiency: number = 0;
+    userId = "";
+
+    @Output() carEmitter : EventEmitter<Car> = new EventEmitter<Car>();
 
     makes = [
         { name: 'Ferrari', code: 'Ferrari' },
@@ -42,7 +48,7 @@ export class CarComponent {
         { name: 'Ford', code: 'Ford' },
         { name: 'Toyota', code: 'Toyota' },
     ];
-    
+
     models: { model: string; make: string }[] = [
         { model: '718', make: 'Ferrari' },
         { model: '488', make: 'Ferrari' },
@@ -82,6 +88,14 @@ export class CarComponent {
         { year: 2023, name: 'Adventure', make: 'Toyota', model: 'Highlander', efficiency: 25 },
     ];
 
+    constructor(private uploadService : UploadService, private authService : AuthService) {}
+
+    ngOnInit(): void {
+        this.authService.userId.subscribe((res) => {
+            this.userId = res;
+        })
+    }
+
     // Update models based on the selected make
     updateModels() {
         this.filteredModels = this.models.filter(
@@ -109,6 +123,10 @@ export class CarComponent {
             model: this.selectedModel!,
             efficiency: this.efficiency,
         };
-        console.log('Car data to save:', carData);
+
+        console.log(carData);
+        console.log(" this is the user id!!!! ",this.userId);
+
+        this.uploadService.uploadCar(this.userId, carData).then(() => alert("Route Added!")).catch(() => alert("some error occured."));
     }
 }

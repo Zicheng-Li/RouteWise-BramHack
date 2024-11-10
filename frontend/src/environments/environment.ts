@@ -4,13 +4,13 @@ export const environment = {
     },
 
     googleMaps : {
-        ***REMOVED*** ""
+        apiKey : ""
     },
 
     openAi : {
         apiKey: ''
     },
     backend : {
-        url: "***REMOVED***"
+        url: ""
     }
 }

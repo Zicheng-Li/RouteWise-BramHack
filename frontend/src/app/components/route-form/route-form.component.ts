@@ -16,6 +16,10 @@ import { ViewChild } from '@angular/core';
 import { ElementRef } from '@angular/core';
 import { LocationService } from 'src/app/services/maps/location.service';
 import { DistanceService } from 'src/app/services/maps/distance.service';
+import { UploadService } from 'src/app/services/firebase/upload.service';
+import { DataService } from 'src/app/services/firebase/data.service';
+import { Route } from 'src/app/models/route';
+import { Car } from 'src/app/models/car';
 
 @Component({
   selector: 'app-route-form',
@@ -44,10 +48,14 @@ export class RouteFormComponent implements OnInit {
   from: any = '';
   to: any = '';
   name: any = '';
-  distance : any = {};
+  distance : any = "0 kms";
+  userId : any = "";
+  cost : number = 0;
+  emission : number = 0;
+  time : string = "";
 
   selectedDays: [] = [];
-  selectedCar = {};
+  selectedCar! : Car | null;
 
   autocomplete : google.maps.places.Autocomplete | undefined;
 
@@ -61,19 +69,40 @@ export class RouteFormComponent implements OnInit {
     { name: 'Sunday', code: 'sun' },
   ];
 
-  cars = [
-    { name: 'Toyota', code: 'NY' },
-    { name: 'Ferrari', code: 'RM' },
-    { name: 'Porsche', code: 'LDN' },
-  ];
+  cars = [];
 
-  constructor( private locationService : LocationService, private distanceService : DistanceService) {}
+  constructor( private dataService : DataService, private locationService : LocationService, private distanceService : DistanceService, private uploadService : UploadService) {}
 
   ngOnInit(): void {
+
+    this.dataService.user$.subscribe((res) => {
+        this.userId = res.id;
+        this.cars = res.cars;
+    });
+
       this.distanceService.disResponse$.subscribe((res) => {
-        this.distance = res;
-        console.log(res);
+        this.distance = res.routes[0].legs[0].distance.text;
+        this.time = res.routes[0].legs[0].duration.text;
+
+        console.log("this is distance", this.distance);
+        console.log("this is time", this.time);
       })
+  }
+
+  addRoute() {
+
+    const route : Route = {
+        name: this.name,
+        cost: this.cost,
+        car: this.selectedCar!,
+        distance: this.distance,
+        emission: this.emission,
+        frequency: [0, 1, 1, 0, 0, 1, 1],
+        from: this.from,
+        to: this.to
+    }
+
+    this.uploadService.uploadRoute(this.userId, route).then(() => alert("Route Added!")).catch(() => alert("some error occured."))
   }
 
   getLocationSuggestions(query : string, toOrFrom : boolean) {

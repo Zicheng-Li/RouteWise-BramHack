@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
+import { analyzePortfolioPrompt } from 'src/app/helpers/prompt';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
@@ -21,7 +22,7 @@ import { Route } from 'src/app/models/route';
 import { Car } from 'src/app/models/car';
 import { AiService } from 'src/app/services/ai/ai.service';
 import { IdentifierService } from 'src/app/services/config/identifier.service';
-
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 interface MonthlyPayment {
     name?: string;
@@ -33,7 +34,9 @@ interface MonthlyPayment {
 @Component({
   selector: 'app-dashboard-page',
   standalone: true,
-  imports: [CommonModule,
+  imports: [
+    ProgressSpinnerModule,
+    CommonModule,
     ButtonModule,
     RippleModule,
     TagModule,
@@ -49,6 +52,8 @@ interface MonthlyPayment {
 })
 
 export class DashboardPageComponent implements OnInit, OnDestroy {
+
+    user : any;
     chartData: any;
 
     chartOptions: any;
@@ -118,10 +123,6 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
           car: this.cars[2]  // "quiet cruiser"
         }
       ];
-      
-      
-      
-      
 
     constructor(private layoutService: LayoutService, private dataService: DataService ,private aiService : AiService, private identifierService : IdentifierService
         ,private uploadService : UploadService) {
@@ -136,6 +137,10 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
+        this.dataService.user$.subscribe((res) => {
+            this.user = res;
+            console.log(this.user);
+  
         // this.routes.forEach((route) => {
         //     // Upload car data first
         //     this.uploadService.uploadCar("J69hAKRxOxWzhusH0b6CwmSycwC2", route.car)
@@ -165,20 +170,10 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
         //       console.error('Error fetching data:', error);
         //     }
         //   });
-
-        this.dataService.getRouteExceptCurrent("J69hAKRxOxWzhusH0b6CwmSycwC2")
-        .then((data) => {
-          console.log('Data for everyone except current user:', data);
         })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-        });
 
         this.identifierService.changeStates(true, false, false);
 
-        this.aiService.generateText("hey how are you").subscribe((res) => {
-            console.log(res)
-        });
 
         this.initChart();
 

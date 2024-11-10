@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { AuthService } from 'src/app/services/firebase/authentication.service';
+import { DataService } from 'src/app/services/firebase/data.service';
 
 @Component({
     templateUrl: './login.component.html',
@@ -19,7 +20,8 @@ export class LoginComponent {
     messageService = inject(MessageService);
     router = inject(Router);
 
-    constructor(private layoutService: LayoutService) {
+  
+    constructor(private layoutService: LayoutService, private dataService : DataService) {
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
         this.recognition = new SpeechRecognition();
         this.recognition.lang = 'en-US';
@@ -64,9 +66,16 @@ export class LoginComponent {
             return;
         }
 
-        this.authService.login(this.email, this.password).subscribe((userId) => {
-            console.log("Logged in User ID:", userId);  // Logs the userId
-            this.router.navigateByUrl("/");
+        this.authService.login(this.email, this.password).subscribe({
+            next : (userId) => {
+                this.dataService.getData(userId);
+            },
+            error : (err) => {
+                this.messageService.add({severity:'error', summary: 'Error', detail: err});
+            },
+            complete : () => {
+                this.router.navigateByUrl("/user");
+            }
         });
     }
 
@@ -74,5 +83,6 @@ export class LoginComponent {
         this.isListening = true;
         this.listeningField = field;
         this.recognition.start();
+
     }
 }

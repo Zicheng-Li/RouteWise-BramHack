@@ -36,7 +36,7 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Information',
                 icon: 'pi pi-info-circle',
-                routerLink: ['user/info']
+                routerLink: ['/user/info']
             }
         ];
     }

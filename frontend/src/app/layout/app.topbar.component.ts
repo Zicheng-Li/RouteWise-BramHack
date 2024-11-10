@@ -24,7 +24,7 @@ export class AppTopbarComponent {
     }
 
     navigateToSettings() {
-        this.router.navigateByUrl('settings')
+        this.router.navigateByUrl('user/settings')
     }
 
 }

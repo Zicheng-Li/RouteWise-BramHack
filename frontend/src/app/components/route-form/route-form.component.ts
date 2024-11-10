@@ -51,7 +51,7 @@ export class RouteFormComponent implements OnInit {
   distance : any = "0 kms";
   userId : any = "";
   cost : number = 12;
-  emission : number = 0;
+  emission : number = 2;
   time : string = "";
 
   selectedDays: [] = [];

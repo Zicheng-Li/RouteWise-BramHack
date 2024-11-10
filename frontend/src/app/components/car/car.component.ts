@@ -127,6 +127,6 @@ export class CarComponent implements OnInit {
         console.log(carData);
         console.log(" this is the user id!!!! ",this.userId);
 
-        this.uploadService.uploadCar(this.userId, carData).then(() => alert("Route Added!")).catch(() => alert("some error occured."));
+        this.uploadService.uploadCar(this.userId, carData).then(() => alert("Vehicle Added!")).catch(() => alert("some error occured."));
     }
 }

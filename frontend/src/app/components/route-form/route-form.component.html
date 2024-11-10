@@ -4,7 +4,7 @@
             <div class="col-5">
                 <p-inputGroup>
                     <p-inputGroup>
-                        <input id="toLocation" type="text" (ngModelChange)="emitRouteModel()" pInputText placeholder="To" #inputField [(ngModel)]="to"/>
+                        <input id="toLocation" type="text" (ngModelChange)="emitRouteModel()" pInputText placeholder="From" #inputField [(ngModel)]="to"/>
 
                         <button
                             type="button"
@@ -74,10 +74,10 @@
     <div class="col-12">
         <div class="grid gap-1 justify-content-center">
             <div class="col-5">
-                <p-chip label="Estimated Emission : " [style]="{height: '100%', width : '100%'}" />
+                <p-chip label="Estimated Emission :" [style]="{height: '100%', width : '100%'}" />
             </div>
             <div class="col-5 text-center">
-                <p-chip label="Estimated Expenditure : " [style]="{height: '100%', width : '100%'}" />
+                <p-chip label="Estimated Expenditure :" [style]="{height: '100%', width : '100%'}" />
             </div>
         </div>
     </div>

@@ -24,7 +24,10 @@ export class AuthService {
           firstName: firstName,
           lastName: lastName,
           friends: [], // Initialize as an empty array
-          totalEmission: 0 // Initialize to zero
+          totalEmission: 0, // Initialize to zero
+          totalCost: 0,
+          totalTime: 0,
+          totalDistance: 0
         }).then(() => userCredential); // Return the user credential after Firestore insert
       } else {
         throw new Error("User ID is undefined.");

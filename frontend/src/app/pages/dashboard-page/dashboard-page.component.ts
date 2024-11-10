@@ -24,6 +24,7 @@ import { AiService } from 'src/app/services/ai/ai.service';
 import { IdentifierService } from 'src/app/services/config/identifier.service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { AuthService } from 'src/app/services/firebase/authentication.service';
+import { TextToSpeechService } from 'src/app/services/textToSpeech/text-to-speech.service';
 
 interface MonthlyPayment {
     name?: string;
@@ -130,7 +131,7 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
       ];
 
     constructor(private layoutService: LayoutService, private dataService: DataService ,private aiService : AiService, private identifierService : IdentifierService
-        ,private uploadService : UploadService, private authService : AuthService) {
+        ,private uploadService : UploadService, private authService : AuthService, private textToSpeechService : TextToSpeechService) {
 
 
         this.subscription = this.layoutService.configUpdate$
@@ -141,6 +142,17 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+
+        this.authService.va$.subscribe((res) => {
+            if(res) {
+                this.aiService.generateText(analyzePortfolioPrompt(this.user)).subscribe({
+                    next: (res) => {
+                        const response = res.choices[0].message.content;
+                        this.textToSpeechService.speak(response);
+                    }
+                })
+            }
+        })
 
         this.authService.userId$.subscribe((res) => {
             this.userId = res;

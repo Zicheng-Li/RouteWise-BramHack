@@ -91,7 +91,7 @@ export class CarComponent implements OnInit {
     constructor(private uploadService : UploadService, private authService : AuthService) {}
 
     ngOnInit(): void {
-        this.authService.userId.subscribe((res) => {
+        this.authService.userId$.subscribe((res) => {
             this.userId = res;
         })
     }

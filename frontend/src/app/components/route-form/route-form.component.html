@@ -1,0 +1,84 @@
+<div class="grid flex flex-column justify-content-between pt-3">
+    <div class="col-12">
+        <div class="grid gap-1 justify-content-center">
+            <div class="col-5">
+                <p-inputGroup>
+                    <p-inputGroup>
+                        <input id="toLocation" type="text" (ngModelChange)="emitRouteModel()" pInputText placeholder="From" #inputField [(ngModel)]="to"/>
+
+                        <button
+                            type="button"
+                            pButton
+                            icon="pi pi-search"
+                            class="p-button-warning"
+                            (click)="getLocationSuggestions(to, true)"
+
+                            ></button>
+                    </p-inputGroup>
+                </p-inputGroup>
+            </div>
+            <div class="col-5">
+                <p-inputGroup>
+                    <input type="text" pInputText placeholder="To" (ngModelChange)="emitRouteModel()" [(ngModel)]="from"/>
+                    <button type="button" pButton icon="pi pi-search" class="p-button-warning" (click)="getLocationSuggestions(from, false)"></button>
+                </p-inputGroup>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="grid gap-1 justify-content-center">
+            <div class="col-10">
+                <google-map height="30vh" width="100%"></google-map>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="grid justify-content-center">
+            <div class="col-10">
+                <p-multiSelect
+        [options]="days"
+        [(ngModel)]="selectedDays"
+        optionLabel="name"
+        placeholder="Select Days" [style]="{width:'100%'}" (ngModelChange)="emitRouteModel()"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="grid justify-content-center">
+            <div class="col-10">
+                <p-dropdown
+                [options]="cars"
+                (ngModelChange)="emitRouteModel()"
+                [(ngModel)]="selectedCar"
+                optionLabel="name"
+                placeholder="Select a Vehicle"
+                [style]="{width:'100%'}" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="grid gap-1 justify-content-center">
+            <div class="col-5">
+                <input type="text" pInputText (ngModelChange)="emitRouteModel()" [(ngModel)]="name" placeholder="Route Name"/>
+            </div>
+            <div class="col-5">
+                <p-chip label="Distance : {{distance}}" [style]="{height: '100%', width : '100%'}" />
+            </div>
+        </div>
+    </div>
+
+    <div class="col-12">
+        <div class="grid gap-1 justify-content-center">
+            <div class="col-5">
+                <p-chip label="Estimated Emission :" [style]="{height: '100%', width : '100%'}" />
+            </div>
+            <div class="col-5 text-center">
+                <p-chip label="Estimated Expenditure :" [style]="{height: '100%', width : '100%'}" />
+            </div>
+        </div>
+    </div>
+</div>

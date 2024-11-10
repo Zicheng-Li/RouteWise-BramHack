@@ -14,7 +14,7 @@ export class AppMenuComponent implements OnInit {
             {
                 label: 'Dashboard',
                 icon: 'pi pi-home',
-                routerLink: ['/']
+                routerLink: ['/user']
             },
             {
                 label: 'Social',
@@ -23,15 +23,20 @@ export class AppMenuComponent implements OnInit {
                     {
                         label: 'Leaderboard',
                         icon: 'pi pi-sliders-h',
-                        routerLink: ['/social']
+                        routerLink: ['/user/social']
                     },
                     {
                         label: 'Chats',
                         icon: 'pi pi-fw pi-comments',
-                        routerLink: ['/social/chats']
+                        routerLink: ['/user/social/chats']
                     },
                 ]
 
+            },
+            {
+                label: 'Information',
+                icon: 'pi pi-info-circle',
+                routerLink: ['/user/info']
             }
         ];
     }

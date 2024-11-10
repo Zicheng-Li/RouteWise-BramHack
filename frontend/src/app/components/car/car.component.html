@@ -1,0 +1,62 @@
+<div class="car-form grid flex flex-column justify-content-between pt-3">
+    <!-- Year Input -->
+    <div class="col-12 form-group">
+        <label for="year">Year</label>
+        <input
+            type="number"
+            [(ngModel)]="selectedYear"
+            placeholder="Enter Year"
+            class="p-inputtext p-component"
+        />
+    </div>
+
+    <!-- Make Selection -->
+    <div class="col-12 form-group">
+        <label for="make">Make</label>
+        <p-dropdown
+            [options]="makes"
+            [(ngModel)]="selectedMake"
+            optionLabel="name"
+            optionValue="name"
+            placeholder="Select Make"
+            [style]="{ width: '100%' }"
+            (onChange)="updateEfficiency()"
+        ></p-dropdown>
+    </div>
+
+    <!-- Model Selection -->
+    <div class="col-12 form-group">
+        <label for="model">Model</label>
+        <p-dropdown
+            [options]="models"
+            [(ngModel)]="selectedModel"
+            optionLabel="model"
+            optionValue="model"
+            placeholder="Select Model"
+            [style]="{ width: '100%' }"
+            (onChange)="updateEfficiency()"
+        ></p-dropdown>
+    </div>
+
+    <!-- Car Name Input -->
+    <div class="col-12 form-group">
+        <label for="name">Car Name</label>
+        <input
+            type="text"
+            [(ngModel)]="selectedCarName"
+            placeholder="Enter Car Name"
+            class="p-inputtext p-component"
+        />
+    </div>
+
+    <!-- Efficiency Display -->
+    <div class="col-12 form-group">
+        <label for="efficiency">Efficiency (km/l)</label>
+        <p-chip label="Efficiency: {{ efficiency }} km/l" [style]="{ height: '100%', width: '100%' }"></p-chip>
+    </div>
+
+    <!-- Save Button -->
+    <div class="col-12 text-center">
+        <button pButton label="Save Car Data" icon="pi pi-save" class="p-button-primary" (click)="saveCarData()"></button>
+    </div>
+</div>

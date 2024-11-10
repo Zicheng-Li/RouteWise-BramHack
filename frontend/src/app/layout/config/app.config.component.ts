@@ -1,11 +1,17 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MenuService } from '../app.menu.service';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { analyzePortfolioPrompt } from 'src/app/helpers/prompt';
+
 import {
     ColorScheme,
     LayoutService,
     MenuColorScheme,
     MenuMode,
 } from '../service/app.layout.service';
+import { IdentifierService } from 'src/app/services/config/identifier.service';
+import { DataService } from 'src/app/services/firebase/data.service';
+import { AiService } from 'src/app/services/ai/ai.service';
 
 @Component({
     selector: 'app-config',
@@ -18,10 +24,41 @@ export class AppConfigComponent implements OnInit {
 
     scales: number[] = [12, 13, 14, 15, 16];
 
+    user : any;
+
+    aiResponse : any;
+
+    isSocialLeaderboard : boolean = false;
+    isDashboard : boolean = false;
+    isSocialChats : boolean = false;
+
+    friends = [
+        { name: 'Rushi', code: 'NY' },
+        { name: 'Sarthak', code: 'RM' },
+        { name: 'Lodu', code: 'LDN' },
+        { name: 'Chandu', code: 'IST' },
+        { name: 'Bihari', code: 'PRS' }
+    ];
+
+    selectedFriend = {};
+
     constructor(
         public layoutService: LayoutService,
-        public menuService: MenuService
+        public menuService: MenuService,
+        private router : Router,
+        private identifierService : IdentifierService,
+        private dataService : DataService,
+        private aiService : AiService
     ) {}
+
+    analyzePortfolio() {
+
+        const prompt = analyzePortfolioPrompt(this.user);
+
+        this.aiService.generateText(prompt).subscribe((res) => {
+            this.aiResponse = res.choices[0].message.content;
+        });
+    }
 
     get visible(): boolean {
         return this.layoutService.state.configSidebarVisible;
@@ -108,6 +145,15 @@ export class AppConfigComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.isSocialLeaderboard = false;
+        this.isDashboard = false;
+        this.isSocialChats = false;
+
+        this.dataService.user$.subscribe((res) => {
+            this.user = res;
+        })
+
         this.componentThemes = [
             { name: 'indigo', color: '#6366F1' },
             { name: 'blue', color: '#3B82F6' },
@@ -118,6 +164,18 @@ export class AppConfigComponent implements OnInit {
             { name: 'orange', color: '#f59e0b' },
             { name: 'pink', color: '#d946ef' },
         ];
+
+        this.identifierService.dashboard$.subscribe((res) => {
+            this.isDashboard = res;
+        })
+
+        this.identifierService.leaderboard$.subscribe((res) => {
+            this.isSocialLeaderboard = res;
+        })
+
+        this.identifierService.chat$.subscribe((res) => {
+            this.isSocialChats = res;
+        })
     }
 
     onConfigButtonClick() {

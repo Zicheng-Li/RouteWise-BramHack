@@ -17,6 +17,7 @@
                 "build": {
                     "builder": "@angular-devkit/build-angular:browser",
                     "options": {
+                        "allowedCommonJsDependencies": ["quill"],
                         "outputPath": "dist/frontend",
                         "index": "src/index.html",
                         "main": "src/main.ts",
@@ -68,7 +69,8 @@
                             "buildTarget": "frontend:build:production"
                         },
                         "development": {
-                            "buildTarget": "frontend:build:development"
+                            "buildTarget": "frontend:build:development",
+                            "liveReload": true
                         }
                     },
                     "defaultConfiguration": "development"

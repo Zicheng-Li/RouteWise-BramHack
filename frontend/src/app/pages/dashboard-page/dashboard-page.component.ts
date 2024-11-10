@@ -25,6 +25,7 @@ import { IdentifierService } from 'src/app/services/config/identifier.service';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { AuthService } from 'src/app/services/firebase/authentication.service';
 import { TextToSpeechService } from 'src/app/services/textToSpeech/text-to-speech.service';
+import { DividerModule } from 'primeng/divider';
 
 interface MonthlyPayment {
     name?: string;
@@ -37,6 +38,7 @@ interface MonthlyPayment {
   selector: 'app-dashboard-page',
   standalone: true,
   imports: [
+    DividerModule,
     ProgressSpinnerModule,
     CommonModule,
     ButtonModule,

@@ -96,10 +96,10 @@ export class RouteFormComponent implements OnInit {
     if(this.name != "" && this.cost != 0 && this.selectedCar != null && this.from != "" && this.to != "" && this.time != "") {
         const route : Route = {
             name: this.name,
-            cost: this.cost,
+            cost: (0.2 + Math.random() * (0.3 - 0.1)) * parseInt(this.distance.split(' ')[0], 10),
             car: this.selectedCar!,
             distance: parseInt(this.distance.split(' ')[0], 10),
-            emission: this.emission,
+            emission: 0.15 * parseInt(this.distance.split(' ')[0], 10),
             frequency: [0, 1, 1, 0, 0, 1, 1],
             from: this.from,
             to: this.to,

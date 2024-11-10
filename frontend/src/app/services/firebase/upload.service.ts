@@ -12,6 +12,8 @@ export class UploadService {
   async uploadRoute(userId: string, route: Route): Promise<void> {
     try {
       const usersCollectionRef = collection(this.firestore, 'users');
+  
+      // Query for the document where uid matches the provided userId
       const userQuery = query(usersCollectionRef, where('uid', '==', userId));
       const userSnapshot = await getDocs(userQuery);
   
@@ -22,38 +24,37 @@ export class UploadService {
   
       const userDocRef = userSnapshot.docs[0].ref;
   
-      // Run all updates in a transaction to ensure atomicity
-      await runTransaction(this.firestore, async (transaction) => {
-        const userDoc = await transaction.get(userDocRef);
+      // Get the current totals from the user document
+      const userDoc = await getDoc(userDocRef);
+      const userData = userDoc.data();
   
-        // Get existing totals
-        const userData = userDoc.data();
-        const currentTotalCost = userData?.['totalCost'] ?? 0;
-        const currentTotalEmission = userData?.['totalEmission'] ?? 0;
-        const currentTotalTime = userData?.['totalTime'] ?? 0;
-        const currentTotalDistance = userData?.['totalDistance'] ?? 0;
+      // Initialize totals if they don’t already exist
+      const currentTotalCost = userData?.['totalCost'] ?? 0;
+      const currentTotalEmission = userData?.['totalEmission'] ?? 0;
+      const currentTotalTime = userData?.['totalTime'] ?? 0;
+      const currentTotalDistance = userData?.['totalDistance'] ?? 0;
   
-        // Calculate updated totals
-        const updatedTotalCost = currentTotalCost + route.cost;
-        const updatedTotalEmission = currentTotalEmission + route.emission;
-        const updatedTotalTime = currentTotalTime + route.time;
-        const updatedTotalDistance = currentTotalDistance + route.distance;
+      // Calculate new totals by adding the route’s values
+    
+      const updatedTotalCost = currentTotalCost + route.cost;
+
+      const updatedTotalEmission = currentTotalEmission + route.emission;
+      const updatedTotalTime = currentTotalTime + route.time; // Assuming time is optional
+      const updatedTotalDistance = currentTotalDistance + route.distance;
   
-        // Update the user's total values in the transaction
-        transaction.update(userDocRef, {
-          totalCost: updatedTotalCost,
-          totalEmission: updatedTotalEmission,
-          totalTime: updatedTotalTime,
-          totalDistance: updatedTotalDistance
-        });
+      // Update the user's total values in the user document
+      await setDoc(userDocRef, {
+        totalCost: updatedTotalCost,
+        totalEmission: updatedTotalEmission,
+        totalTime: updatedTotalTime,
+        totalDistance: updatedTotalDistance
+      }, { merge: true });
   
-        // Reference to the 'routes' sub-collection within the user document
-        const routesCollectionRef = collection(userDocRef, 'routes');
+      // Reference to the 'routes' sub-collection within the user document
+      const routesCollectionRef = collection(userDocRef, 'routes');
   
-        // Add the route to the 'routes' sub-collection in the transaction
-        transaction.set(doc(routesCollectionRef), route);
-      });
-  
+      // Add the route to the 'routes' sub-collection
+      await setDoc(doc(routesCollectionRef), route);
       console.log("Route successfully uploaded and totals updated in the user's document");
   
     } catch (error) {

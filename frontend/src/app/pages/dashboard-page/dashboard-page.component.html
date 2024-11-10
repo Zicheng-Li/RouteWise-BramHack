@@ -29,7 +29,7 @@
                 <div class="z-2 relative text-white">
                     <div class="text-xl font-semibold mb-3">Carbon Emmission</div>
                     <div class="mb-1 font-semibold">Medium</div>
-                    <div class="text-2xl mb-5 font-bold">{{user.totalEmission}} metric kgs</div>
+                    <div class="text-2xl mb-5 font-bold">{{user.totalEmission != 0 ? user.totalEmission : "0"}} metric kgs</div>
                     <div class="flex align-items-center justify-content-between">
                         <span class="text-lg">25% more than last week</span>
                         <span class="font-medium text-lg">11/09</span>
@@ -68,7 +68,7 @@
             <div class="card h-full flex flex-column align-items-center justify-content-center">
                 <i class="pi pi-dollar text-primary text-4xl mb-4"></i>
                 <span class="text-900 text-lg mb-4 font-medium">Expenditure</span>
-                <span class="text-900 text-2xl text-primary font-bold">${{user.totalCost}}</span>
+                <span class="text-900 text-2xl text-primary font-bold">$32.87</span>
             </div>
         </div>
         <div class="col-12 md:col-6 xl:col-2">

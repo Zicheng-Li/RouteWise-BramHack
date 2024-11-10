@@ -1,14 +1,14 @@
 export const environment = {
     mapbox : {
-        accessToken : "***REMOVED***"
+        accessToken : ""
     },
 
     googleMaps : {
-        ***REMOVED*** "***REMOVED***"
+        ***REMOVED*** ""
     },
 
     openAi : {
-        apiKey: '***REMOVED***'
+        apiKey: ''
     },
     backend : {
         url: "***REMOVED***"

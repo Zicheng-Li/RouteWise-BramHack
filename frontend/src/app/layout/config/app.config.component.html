@@ -34,7 +34,7 @@
     @else {
         <div class="grid mt-5">
             <div class="col-12">
-                <p-button label="Analyze Portfolio" [outlined]="true" [style]="{width : '100%'}" />
+                <p-button label="Analyze Portfolio" [outlined]="true" [style]="{width : '100%'}" (onClick)="analyzePortfolio()" />
             </div>
             <div class="col-12">
                 <p-button label="Explore Collabs" [outlined]="true" [style]="{width : '100%'}" />
@@ -42,5 +42,14 @@
         </div>
     }
 
+    @if(aiResponse) {
+        <div class="grid mt-5 border-round border-primary border-1">
+            <div class="col-12">
+                <p>
+                    {{aiResponse}}
+                </p>
+            </div>
+        </div>
+    }
 
 </p-sidebar>

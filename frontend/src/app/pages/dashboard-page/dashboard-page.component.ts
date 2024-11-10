@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgModule } from '@angular/core';
+import { analyzePortfolioPrompt } from 'src/app/helpers/prompt';
 import { CommonModule } from '@angular/common';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
@@ -138,19 +139,8 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
             console.log(this.user);
         })
 
-        this.dataService.getRouteExceptCurrent("J69hAKRxOxWzhusH0b6CwmSycwC2")
-        .then((data) => {
-          console.log('Data for everyone except current user:', data);
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-        });
-
         this.identifierService.changeStates(true, false, false);
 
-        this.aiService.generateText("hey how are you").subscribe((res) => {
-            console.log(res)
-        });
 
         this.initChart();
 

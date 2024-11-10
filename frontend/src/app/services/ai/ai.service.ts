@@ -22,8 +22,8 @@ export class AiService {
       messages: [
         { role: 'user', content: message }
       ],
-      
-      max_tokens: 100
+
+      max_tokens: 1500
 
     };
 

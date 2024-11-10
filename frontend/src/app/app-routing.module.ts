@@ -55,7 +55,7 @@ const routes: Routes = [
                 data : { breadcrumb: 'Settings'}
             },
             {
-                path : 'user/info',
+                path : 'info',
                 component : InfoPageComponent,
                 data : { breadcrumb: 'Information'},
             },
@@ -74,7 +74,7 @@ const routes: Routes = [
                 data: { breadcrumb: 'Payment Page' }
             },
 
-            
+
 
 
 
@@ -110,7 +110,7 @@ const routes: Routes = [
     { path: 'landing', loadChildren: () => import('./demo/components/landing/landing.module').then(m => m.LandingModule) },
     { path: 'notfound', loadChildren: () => import('./demo/components/notfound/notfound.module').then(m => m.NotfoundModule) },
     { path: '**', redirectTo: '/notfound' }
-    
+
 ];
 
 @NgModule({

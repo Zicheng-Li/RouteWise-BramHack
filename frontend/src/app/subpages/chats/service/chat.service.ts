@@ -9,25 +9,25 @@ export class ChatService {
 
     _activeUser: User = {
         "id": 1,
-        "name": "Ioni Bowcher",
+        "name": "Sydney Sweeney",
         "image": "ionibowcher.png",
         "status": "active",
         "messages": [
             {
-                "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+                "text": "Hey, I'm thinking about starting a carpool from Oshawa to Bowmanville to cut down on emissions. Interested?",
                 "ownerId": 1,
                 "createdAt": 1652646338240
             },
             {
-                "text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "text": "I calculated that we could save up to 20 kg of CO2 emissions weekly by carpooling. Let's do this!",
                 "ownerId": 1,
                 "createdAt": 1652646368718
             },
             {
-                "text": "Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua",
+                "text": "That's amazing! Count me in. I will make the money transfer right away!",
                 "ownerId": 123,
                 "createdAt": 1652646368718
-            },
+            }
         ],
         "lastSeen": "2d"
     }

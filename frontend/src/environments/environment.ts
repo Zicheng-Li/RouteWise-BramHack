@@ -9,5 +9,8 @@ export const environment = {
 
     openAi : {
         apiKey: '***REMOVED***'
+    },
+    backend : {
+        url: "***REMOVED***"
     }
 }

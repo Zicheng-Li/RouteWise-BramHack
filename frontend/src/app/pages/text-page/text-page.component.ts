@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { TextToSpeechService } from 'src/app/services/textToSpeech/text-to-speech.service';
 @Component({
   selector: 'app-text-page',
   templateUrl: './text-page.component.html',
@@ -7,15 +7,11 @@ import { Component } from '@angular/core';
   standalone: true,
 })
 export class TextPageComponent {
-  textToSpeak: string = 'This is the paragraph text that will be spoken aloud when you click the button.';
+  textToSpeak: string = 'This is a string to test text-to-speech';
 
-  // Method to speak the text
+  constructor(private textToSpeechService: TextToSpeechService) {}
+
   speakText() {
-    if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(this.textToSpeak);
-      window.speechSynthesis.speak(utterance);
-    } else {
-      console.error("Text-to-Speech is not supported in this browser.");
-    }
+    this.textToSpeechService.speak(this.textToSpeak);
   }
 }

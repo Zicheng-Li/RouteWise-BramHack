@@ -14,14 +14,14 @@ export class LoginComponent {
     password: string = '';
     isListening = false;
     listeningField: 'email' | 'password' | null = null;
+    enableSpeech: boolean = false; // Added this property
     recognition: any;
 
     authService = inject(AuthService);
     messageService = inject(MessageService);
     router = inject(Router);
 
-  
-    constructor(private layoutService: LayoutService, private dataService : DataService) {
+    constructor(private layoutService: LayoutService, private dataService: DataService) {
         const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
         this.recognition = new SpeechRecognition();
         this.recognition.lang = 'en-US';
@@ -34,10 +34,9 @@ export class LoginComponent {
 
             // Process transcript based on the field being listened to
             if (this.listeningField === 'email') {
-                // Allow only one "@" and remove spaces
                 transcript = transcript.replace(/\s/g, '').replace(/at/g, '@');
                 if (!transcript.includes('@')) {
-                    this.messageService.add({severity: 'error', summary: 'Error', detail: 'Email must contain @ symbol'});
+                    this.messageService.add({ severity: 'error', summary: 'Error', detail: 'Email must contain @ symbol' });
                 } else {
                     this.email = transcript;
                 }
@@ -67,13 +66,13 @@ export class LoginComponent {
         }
 
         this.authService.login(this.email, this.password).subscribe({
-            next : (userId) => {
+            next: (userId) => {
                 this.dataService.getData(userId);
             },
-            error : (err) => {
-                this.messageService.add({severity:'error', summary: 'Error', detail: err});
+            error: (err) => {
+                this.messageService.add({ severity: 'error', summary: 'Error', detail: err });
             },
-            complete : () => {
+            complete: () => {
                 this.router.navigateByUrl("/user");
             }
         });
@@ -83,6 +82,5 @@ export class LoginComponent {
         this.isListening = true;
         this.listeningField = field;
         this.recognition.start();
-
     }
 }

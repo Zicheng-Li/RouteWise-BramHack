@@ -136,25 +136,25 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
 
-        this.routes.forEach((route) => {
-            // Upload car data first
-            this.uploadService.uploadCar("J69hAKRxOxWzhusH0b6CwmSycwC2", route.car)
-              .then(() => {
-                console.log(`Car "${route.car.name}" uploaded successfully.`);
-              })
-              .catch((error) => {
-                console.error(`Error uploading car "${route.car.name}":`, error);
-              });
+        // this.routes.forEach((route) => {
+        //     // Upload car data first
+        //     this.uploadService.uploadCar("J69hAKRxOxWzhusH0b6CwmSycwC2", route.car)
+        //       .then(() => {
+        //         console.log(`Car "${route.car.name}" uploaded successfully.`);
+        //       })
+        //       .catch((error) => {
+        //         console.error(`Error uploading car "${route.car.name}":`, error);
+        //       });
       
-            // Upload route data after the car
-            this.uploadService.uploadRoute("J69hAKRxOxWzhusH0b6CwmSycwC2", route)
-              .then(() => {
-                console.log(`Route "${route.name}" uploaded successfully.`);
-              })
-              .catch((error) => {
-                console.error(`Error uploading route "${route.name}":`, error);
-              });
-          });
+        //     // Upload route data after the car
+        //     this.uploadService.uploadRoute("J69hAKRxOxWzhusH0b6CwmSycwC2", route)
+        //       .then(() => {
+        //         console.log(`Route "${route.name}" uploaded successfully.`);
+        //       })
+        //       .catch((error) => {
+        //         console.error(`Error uploading route "${route.name}":`, error);
+        //       });
+        //   });
         
 
         // this.dataService.getData("J69hAKRxOxWzhusH0b6CwmSycwC2").subscribe({

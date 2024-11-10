@@ -15,6 +15,12 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { LayoutService } from 'src/app/layout/service/app.layout.service';
 import { RouteFormComponent } from "../../components/route-form/route-form.component";
 import { CarComponent } from "../../components/car/car.component";
+import { DataService } from 'src/app/services/firebase/data.service';
+import { UploadService } from 'src/app/services/firebase/upload.service';
+import { Route } from 'src/app/models/route';
+import { Car } from 'src/app/models/car';
+import { AiService } from 'src/app/services/ai/ai.service';
+import { IdentifierService } from 'src/app/services/config/identifier.service';
 
 
 interface MonthlyPayment {
@@ -52,11 +58,72 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     subscription: Subscription;
 
     display : boolean = false;
-
     displayCar: boolean = false;
 
+    cars: Car[] = [
+        {
+          year: 2019,
+          name: "green machine",
+          make: "Honda",
+          model: "Civic",
+          efficiency: 32
+        },
+        {
+          year: 2022,
+          name: "fastback",
+          make: "Ford",
+          model: "Mustang",
+          efficiency: 15
+        },
+        {
+          year: 2021,
+          name: "quiet cruiser",
+          make: "Nissan",
+          model: "Leaf",
+          efficiency: 120
+        }
+      ];
+      routes: Route[] = [
+        {
+          name: "morning commute",
+          from: "apartment",
+          to: "downtown office",
+          distance: 18,
+          emission: 7,
+          cost: 12,
+          frequency: [1, 1, 1, 1, 1, 0, 0],
+          car: this.cars[0]  // "green machine"
+        },
+        {
+          name: "business trip",
+          from: "home",
+          to: "airport",
+          distance: 45,
+          emission: 12,
+          cost: 25,
+          frequency: [1, 1, 1, 1, 1, 1, 0],
+          car: this.cars[1]  // "fastback"
+        },
+        {
+          name: "park & ride",
+          from: "suburb",
+          to: "city center",
+          distance: 10,
+          emission: 3,
+          cost: 8,
+          frequency: [0, 0, 1, 1, 1, 0, 0],
+          car: this.cars[2]  // "quiet cruiser"
+        }
+      ];
+      
+      
+      
+      
 
-    constructor(private layoutService: LayoutService) {
+    constructor(private layoutService: LayoutService, private dataService: DataService ,private aiService : AiService, private identifierService : IdentifierService
+        ,private uploadService : UploadService) {
+
+
         this.subscription = this.layoutService.configUpdate$
             .pipe(debounceTime(25))
             .subscribe((config) => {
@@ -65,6 +132,51 @@ export class DashboardPageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit() {
+
+        // this.routes.forEach((route) => {
+        //     // Upload car data first
+        //     this.uploadService.uploadCar("1YOOl3MKJFPk437lqSblA2jIQTh1", route.car)
+        //       .then(() => {
+        //         console.log(`Car "${route.car.name}" uploaded successfully.`);
+        //       })
+        //       .catch((error) => {
+        //         console.error(`Error uploading car "${route.car.name}":`, error);
+        //       });
+      
+        //     // Upload route data after the car
+        //     this.uploadService.uploadRoute("1YOOl3MKJFPk437lqSblA2jIQTh1", route)
+        //       .then(() => {
+        //         console.log(`Route "${route.name}" uploaded successfully.`);
+        //       })
+        //       .catch((error) => {
+        //         console.error(`Error uploading route "${route.name}":`, error);
+        //       });
+        //   });
+        
+
+        // this.dataService.getData("J69hAKRxOxWzhusH0b6CwmSycwC2").subscribe({
+        //     next: (data) => {
+        //       console.log('User Data:', data);
+        //     },
+        //     error: (error) => {
+        //       console.error('Error fetching data:', error);
+        //     }
+        //   });
+
+        this.dataService.getRouteExceptCurrent("J69hAKRxOxWzhusH0b6CwmSycwC2")
+        .then((data) => {
+          console.log('Data for everyone except current user:', data);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+
+        this.identifierService.changeStates(true, false, false);
+
+        this.aiService.generateText("hey how are you").subscribe((res) => {
+            console.log(res)
+        });
+
         this.initChart();
 
         this.payments = [

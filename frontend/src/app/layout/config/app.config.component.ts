@@ -1,11 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MenuService } from '../app.menu.service';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+
 import {
     ColorScheme,
     LayoutService,
     MenuColorScheme,
     MenuMode,
 } from '../service/app.layout.service';
+import { IdentifierService } from 'src/app/services/config/identifier.service';
 
 @Component({
     selector: 'app-config',
@@ -18,9 +21,25 @@ export class AppConfigComponent implements OnInit {
 
     scales: number[] = [12, 13, 14, 15, 16];
 
+    isSocialLeaderboard : boolean = false;
+    isDashboard : boolean = false;
+    isSocialChats : boolean = false;
+
+    friends = [
+        { name: 'Rushi', code: 'NY' },
+        { name: 'Sarthak', code: 'RM' },
+        { name: 'Lodu', code: 'LDN' },
+        { name: 'Chandu', code: 'IST' },
+        { name: 'Bihari', code: 'PRS' }
+    ];
+
+    selectedFriend = {};
+
     constructor(
         public layoutService: LayoutService,
-        public menuService: MenuService
+        public menuService: MenuService,
+        private router : Router,
+        private identifierService : IdentifierService
     ) {}
 
     get visible(): boolean {
@@ -108,6 +127,11 @@ export class AppConfigComponent implements OnInit {
     }
 
     ngOnInit() {
+
+        this.isSocialLeaderboard = false;
+        this.isDashboard = false;
+        this.isSocialChats = false;
+
         this.componentThemes = [
             { name: 'indigo', color: '#6366F1' },
             { name: 'blue', color: '#3B82F6' },
@@ -118,6 +142,18 @@ export class AppConfigComponent implements OnInit {
             { name: 'orange', color: '#f59e0b' },
             { name: 'pink', color: '#d946ef' },
         ];
+
+        this.identifierService.dashboard$.subscribe((res) => {
+            this.isDashboard = res;
+        })
+
+        this.identifierService.leaderboard$.subscribe((res) => {
+            this.isSocialLeaderboard = res;
+        })
+
+        this.identifierService.chat$.subscribe((res) => {
+            this.isSocialChats = res;
+        })
     }
 
     onConfigButtonClick() {

@@ -31,8 +31,9 @@ export class LoginComponent {
             return;
         }
 
-        this.authService.login(this.email, this.password).subscribe(() => {
+        this.authService.login(this.email, this.password).subscribe((userId) => {
+            console.log("Logged in User ID:", userId);  // Logs the userId
             this.router.navigateByUrl("/");
-        })
+          });
     }
 }

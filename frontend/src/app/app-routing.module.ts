@@ -6,6 +6,7 @@ import { SettingsPageComponent } from './pages/settings-page/settings-page.compo
 import { SocialPageComponent } from './pages/social-page/social-page.component';
 import { LeaderboardComponent } from './subpages/leaderboard/leaderboard.component';
 import { ChatsComponent } from './subpages/chats/chats.component';
+import { InfoPageComponent } from './pages/info-page/info-page.component';
 
 const routerOptions: ExtraOptions = {
     anchorScrolling: 'enabled'
@@ -42,6 +43,11 @@ const routes: Routes = [
                 path : 'settings',
                 component : SettingsPageComponent,
                 data : { breadcrumb: 'Settings'}
+            },
+            {
+                path : 'info',
+                component : InfoPageComponent,
+                data : { breadcrumb: 'Information'},
             },
 
 

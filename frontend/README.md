@@ -1,27 +1,20 @@
-# ApolloNgx
+# RouteWise
+A one stop shop application for commute collaborations and carbon footprint tracking.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.0.0.
+## ROUTES and PORTFOLIO
 
-## Development server
+Users get the option to add routes to their portfolio. 
+When clicking on add route, it gives you options to add a starting point and ending point. 
+When you save the route, information related to it is saved in your portfolio. This includes the kms you will be travelling, starting point, ending point, time of travel, day of travel, carbon footprint, vehicle. There is also a “SUGGEST COLLABS” button (description later in document) 
+Users can set the route to be recurring or one time. 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## DASHBOARD
+The application has a dashboard which analyzes your travel information based on your portfolio. This includes the car you will be using the most, amt of gas you use on weekly basis, amt of pollution you are causing, total kms travelled, most taken route, longest route. 
+Dashboard will also have a “AI ANALYZE” button. Once you click on it, all your portfolio is feeded into an AI api and it comments on your portfolio. It will also give suggestions on how you can opt for better options for some travels. 
 
-## Code scaffolding
+## GAMIFICATION ASPECT
+Users can also add friends and there is going to be a leaderboard in which you will be ranked amongst your friends on basis of carbon footprint. The aim of this feature is to increase the urge in ppl of wanting to opt for cleaner modes of transportations and compete with eachother. 
+(optional) once you click on someone’s profile, it shows you their portfolio. Their portfolio will have similar things to your own but instead of “AI ANALYZE” button you will have “AI COMPARE” where your and that person’s portfolio will be feeded in AI and it will comment on who is performing better in what area. It will also suggest potential carpools or collaborations if some of your routes intersect or come close. 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+## COLLABORATION FEATURE
+You can turn on “OPEN TO COLLAB” feature on their app which will make them available for suggestions. Some other person who is adding a route to his portfolio clicks on “SUGGEST COLLABS”. This other person will get your name and contact info as a suggestion if your routes intersect or are close. Users can then just get in touch from there and collaborate with eachother for transportation. 
